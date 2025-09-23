@@ -1,6 +1,6 @@
 import './style.css';
-import Component from './Component';
+import App from './App';
 
 const body = document.querySelector('body');
 
-body.append(Component());
+body.append(App().DOMElement);

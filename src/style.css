@@ -1,1 +1,26 @@
-@import '../node_modules/@huntoreocodes/hunter-normalize/hunter-normalize.css'
+@import '../node_modules/@huntoreocodes/hunter-normalize/hunter-normalize.css';
+
+body, html {
+  height: 100%;
+}
+
+.app {
+  grid-template-areas: 
+    'header header header'
+    'sidebar content content'
+    'sidebar content content';
+  grid-template-rows: 100px 1fr;
+  grid-template-columns: minmax(100px, 200px);
+}
+
+.header {
+  grid-area: header;
+}
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+.content {
+  grid-area: content;
+}
