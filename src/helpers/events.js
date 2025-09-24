@@ -1,4 +1,4 @@
-import App from "../App";
+import Task from "../Components/Task-sidebar";
 
 const toggleSide = (event) => {
     const app = document.querySelector('.app');
@@ -7,6 +7,13 @@ const toggleSide = (event) => {
     console.log(app);
 }
 
+const addTask = (event) => {
+    const container = document.querySelector('.tasks');
+    const newTask = Task('New Task!');
+    container.append(newTask.DOMElement);
+}
+
 export {
     toggleSide,
+    addTask
 }
