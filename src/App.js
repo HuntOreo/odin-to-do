@@ -9,6 +9,7 @@ const App = function () {
     height: '100%'
   });
 
+  app.addClass('showSidebar');
 
   const elements = [Nav(), Sidebar(), Content()]
 
