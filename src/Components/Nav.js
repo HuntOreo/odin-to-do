@@ -6,7 +6,7 @@ const Nav = function () {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-around',
-    background: 'lightgreen',
+    background: 'lightcoral',
   });
   const logo = new Head({size: 1, content: 'ToDo'});
   const toggleSidebar = new Button('Toggle Sidebar');

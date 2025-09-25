@@ -4,12 +4,12 @@ import { addTask, formatTaskDate} from '../helpers/events';
 
 const Sidebar = function () {
   const container = new Container({ selectors: 'sidebar' }, {
-    background: 'lightcoral',
+    background: 'lightgreen',
   });
   const addTaskBtn = new Button('Add Task');
   addTaskBtn.addListener('click', () => {
       const formattedDate = formatTaskDate(dateInputEl.value)
-      addTask(formattedDate.month);
+      addTask(formattedDate);
     }
   );
   
@@ -20,7 +20,6 @@ const Sidebar = function () {
   dateInputEl.setAttribute('type', 'date');
   dateInputEl.setAttribute('name', 'date');
 
-  tasksContainer.appendEl(task);
   container.appendEl([dateInput, addTaskBtn, tasksContainer]);
   return container;
 }
