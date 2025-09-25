@@ -1,4 +1,4 @@
-import { Container, Para } from "elekit";
+import { Container, Elem, Para } from "elekit";
 
 const Task = function(content) {
     const container = new Container('task', { 
@@ -6,10 +6,18 @@ const Task = function(content) {
         background: 'hotpink',
         overflow: 'hidden'
     });
-    const contentWrapper = new Container('wrappper');
+    const contentWrapper = new Container('wrapper');
     const text = new Para(content);
     
+    // const dateInput = new Elem({ tag: 'input' });
+    // const dateInputEl = dateInput.DOMElement;
+    // dateInputEl.setAttribute('type', 'date');
+    // dateInputEl.setAttribute('name', 'date');
+    // dateInputEl.addEventListener('change', 
+    //     () => formatTaskDate(dateInput.id, dateInputEl.value));
+    
     contentWrapper.appendEl(text);
+    // contentWrapper.appendEl([text, dateInput]);
     container.appendEl(contentWrapper);
 
     return container;

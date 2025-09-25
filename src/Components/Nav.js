@@ -1,4 +1,4 @@
-import { Button, Container, Header } from 'elekit';
+import { Button, Container, Head } from 'elekit';
 import { toggleSide } from '../helpers/events';
  
 const Nav = function () {
@@ -8,7 +8,7 @@ const Nav = function () {
     justifyContent: 'space-around',
     background: 'lightgreen',
   });
-  const logo = new Header({size: 1, content: 'ToDo'});
+  const logo = new Head({size: 1, content: 'ToDo'});
   const toggleSidebar = new Button('Toggle Sidebar');
   toggleSidebar.addListener('click', toggleSide);
 

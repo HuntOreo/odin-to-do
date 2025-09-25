@@ -28,6 +28,8 @@
     "webpack-merge": "^6.0.1"
   },
   "dependencies": {
-    "@huntoreocodes/hunter-normalize": "^1.1.1"
+    "@huntoreocodes/hunter-normalize": "^1.1.1",
+    "date-fns": "^4.1.0",
+    "luxon": "^3.7.2"
   }
 }
