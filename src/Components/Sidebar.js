@@ -1,26 +1,13 @@
-import { Button, Elem, Container } from 'elekit';
-import Task from './Task-sidebar';
-import { addTask, formatTaskDate} from '../helpers/events';
+import { Container } from 'elekit';
+import TaskForm from './Sidebar/TaskForm';
 
 const Sidebar = function () {
   const container = new Container({ selectors: 'sidebar' }, {
     background: 'lightgreen',
   });
-  const addTaskBtn = new Button('Add Task');
-  addTaskBtn.addListener('click', () => {
-      const formattedDate = formatTaskDate(dateInputEl.value)
-      addTask(formattedDate);
-    }
-  );
-  
   const tasksContainer = new Container({selectors: 'tasks'});
 
-  const dateInput = new Elem({ tag: 'input' });
-  const dateInputEl = dateInput.DOMElement;
-  dateInputEl.setAttribute('type', 'date');
-  dateInputEl.setAttribute('name', 'date');
-
-  container.appendEl([dateInput, addTaskBtn, tasksContainer]);
+  container.appendEl([ TaskForm(), tasksContainer]);
   return container;
 }
 

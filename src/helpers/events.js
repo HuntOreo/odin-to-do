@@ -1,5 +1,5 @@
 import { Elem, } from "elekit";
-import Task from "../Components/Task-sidebar";
+import Task from "../Components/Sidebar/Task";
 import { DateTime } from "luxon";
 
 const toggleSide = (event) => {
@@ -10,7 +10,7 @@ const toggleSide = (event) => {
 
 const addTask = (date) => {
   const container = document.querySelector('.tasks');
-  const newTask = Task('words words words');
+  const newTask = Task(date.day);
   const monthFolder = document.querySelector(`[data-month="${date.month}"]`);
   const monthExists = Boolean(monthFolder);
 
