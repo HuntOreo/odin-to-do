@@ -29,9 +29,11 @@ const TaskForm = function () {
 	const formEl = form.DOMElement;
 	const taskBtn = formEl.querySelector('#sidebarAddTaskBtn');
 	const dateInput = formEl.querySelector('#sidebarDateInput');
+	const contentInput = formEl.querySelector('#sidebarContentInput');
 	taskBtn.addEventListener('click', () => {
       const formattedDate = formatTaskDate(dateInput.value);
-      addTask(formattedDate);
+			const content = contentInput.value;
+      addTask(formattedDate, content);
     });
 
 	return form;

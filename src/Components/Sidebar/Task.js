@@ -1,19 +1,23 @@
-import { Container, Elem, Para } from "elekit";
+import { Container } from "elekit";
 
-const Task = function(content) {
-    const container = new Container('task', { 
-        maxHeight: '50px',
-        background: 'hotpink',
-        overflow: 'hidden',
-        marginLeft: '10px'
-    });
-    const contentWrapper = new Container('wrapper');
-    const text = new Para(content);
+class Task {
+  constructor ({ date, content }) {
+		this.id = crypto.randomUUID();
+		this._date = {
+			day: date.day,
+			month: date.month,
+			year: date.year,
+		}
+		this._content = `
+				<p>${content}</p>
+		`;
+		const container = new Container('container');
+		container.DOMElement.innerHTML = this._content;
+		this._DOMElement = container.DOMElement;
+  }
 
-    contentWrapper.appendEl(text);
-    container.appendEl(contentWrapper);
-
-    return container;
+	get content() { return this._content; }
+	get DOMElement() { return this._DOMElement; }
 }
 
 export default Task;
