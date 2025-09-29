@@ -3,16 +3,19 @@ import Task from "../../Components/Sidebar/Task";
 
 const addTask = (date, content) => {
   const tasks = document.querySelector('.tasks');
+
   let monthFolder = document.querySelector(`[data-month="${date.month}"]`);
-  let dayFolder;
+  let dayFolder; // keeps track of the day folder element.
 
   const task = new Task({ date, content });
   const taskContainer = new Container('task');
   taskContainer.append(task);
 
+  // if month does exist, attempt to grab matching day.
   if (monthFolder) {
     dayFolder = monthFolder.querySelector(`[data-day="${date.day}"]`);
   } else {
+    // otherwise build the folder
     monthFolder = buildMonthFolder(date.month).DOMElement;
   }
 
@@ -27,6 +30,9 @@ const addTask = (date, content) => {
   tasks.append(monthFolder);
 }
 
+/*/////////////////////
+// HELPER FUNCTIONS ///
+*//////////////////////
 function buildMonthFolder(month) {
   const folder = new Container('month');
   folder.DOMElement.innerHTML = `<h2>${month}</h2>`;
