@@ -18,6 +18,10 @@ class Task {
 
 	get content() { return this._content; }
 	get DOMElement() { return this._DOMElement; }
+	get color() { return this._color };
+	get date() { return this._date };
+
+	set color(colorArg) { this._color = colorArg; }
 }
 
 export default Task;

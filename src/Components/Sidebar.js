@@ -1,13 +1,13 @@
 import { Container } from 'elekit';
 import TaskForm from './Sidebar/TaskForm';
 
-const Sidebar = function () {
+const Sidebar = function (taskList) {
   const container = new Container({ selectors: 'sidebar' }, {
     background: 'lightgreen',
   });
   const tasksContainer = new Container({ selectors: 'tasks' });
 
-  container.append([TaskForm(), tasksContainer]);
+  container.append([TaskForm(taskList), tasksContainer]);
   return container;
 }
 

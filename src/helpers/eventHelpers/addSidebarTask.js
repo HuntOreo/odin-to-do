@@ -1,7 +1,7 @@
 import { Container } from "elekit";
 import Task from "../../Components/Sidebar/Task";
 
-const addTask = (date, content) => {
+const addSidebarTask = (taskList, date, content) => {
   const tasks = document.querySelector('.tasks');
 
   let monthFolder = document.querySelector(`[data-month="${date.month}"]`);
@@ -28,6 +28,8 @@ const addTask = (date, content) => {
   dayFolder.append(taskContainer.DOMElement);
   monthFolder.append(dayFolder);
   tasks.append(monthFolder);
+  taskList.push(task);
+  console.log(taskList);
 }
 
 /*/////////////////////
@@ -47,4 +49,4 @@ function buildDayFolder(day) {
   return folder
 }
 
-export default addTask;
+export default addSidebarTask;

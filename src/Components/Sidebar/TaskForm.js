@@ -1,9 +1,9 @@
 import { Elem } from "elekit";
 import { DateTime } from "luxon";
 import { formatTaskDate } from "../../helpers/events";
-import addTask from '../../helpers/eventHelpers/addTask';
+import addTask from '../../helpers/eventHelpers/addSidebarTask';
 
-const TaskForm = function () {
+const TaskForm = function (taskList) {
 	const date = DateTime.now();
 	const dateFormatted = {
 		day: date.day < 10 ? `0${date.day}` : date.day,
@@ -35,7 +35,7 @@ const TaskForm = function () {
 	taskBtn.addEventListener('click', () => {
 		const formattedDate = formatTaskDate(dateInput.value);
 		const content = contentInput.value;
-		addTask(formattedDate, content);
+		addTask(taskList, formattedDate, content);
 	});
 
 	return form;
