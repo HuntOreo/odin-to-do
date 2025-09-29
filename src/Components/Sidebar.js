@@ -5,9 +5,9 @@ const Sidebar = function () {
   const container = new Container({ selectors: 'sidebar' }, {
     background: 'lightgreen',
   });
-  const tasksContainer = new Container({selectors: 'tasks'});
+  const tasksContainer = new Container({ selectors: 'tasks' });
 
-  container.appendEl([ TaskForm(), tasksContainer]);
+  container.append([TaskForm(), tasksContainer]);
   return container;
 }
 
@@ -20,7 +20,7 @@ export default Sidebar;
     and tasks nested inside those days.
   Months > Days > Tasks
 
-  There will be mutliple ways to create a task. 
+  There will be multiple ways to create a task. 
   On the main sidebar, You can create a month folder, 
     where you will be able to create a task and assign it a day of the month.
   You could also create a task and assign it a month/date that way.

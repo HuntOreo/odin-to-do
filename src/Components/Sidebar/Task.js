@@ -1,7 +1,7 @@
 import { Container } from "elekit";
 
 class Task {
-  constructor ({ date, content }) {
+	constructor({ date, content }) {
 		this.id = crypto.randomUUID();
 		this._date = {
 			day: date.day,
@@ -14,7 +14,7 @@ class Task {
 		const container = new Container('container');
 		container.DOMElement.innerHTML = this._content;
 		this._DOMElement = container.DOMElement;
-  }
+	}
 
 	get content() { return this._content; }
 	get DOMElement() { return this._DOMElement; }

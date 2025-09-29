@@ -13,7 +13,7 @@ const App = function () {
 
   const elements = [Nav(), Sidebar(), Content()]
 
-  app.appendEl(elements);
+  app.append(elements);
   return app;
 }
 

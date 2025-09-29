@@ -1,6 +1,7 @@
 import { Elem } from "elekit";
 import { DateTime } from "luxon";
-import { formatTaskDate, addTask } from "../../helpers/events";
+import { formatTaskDate } from "../../helpers/events";
+import addTask from '../../helpers/eventHelpers/addTask';
 
 const TaskForm = function () {
 	const date = DateTime.now();
@@ -10,8 +11,9 @@ const TaskForm = function () {
 		year: date.year
 	}
 
-  const form = new Elem({ tag: 'form',
-    content: `
+	const form = new Elem({
+		tag: 'form',
+		content: `
       <div class="container">
         <div class="wrapper">
 					<label for="sidebarDateInput">Date</label>
@@ -24,17 +26,17 @@ const TaskForm = function () {
 				<button type="button" id="sidebarAddTaskBtn">Add Task</button>
       </div>
     `
-  });
+	});
 
 	const formEl = form.DOMElement;
 	const taskBtn = formEl.querySelector('#sidebarAddTaskBtn');
 	const dateInput = formEl.querySelector('#sidebarDateInput');
 	const contentInput = formEl.querySelector('#sidebarContentInput');
 	taskBtn.addEventListener('click', () => {
-      const formattedDate = formatTaskDate(dateInput.value);
-			const content = contentInput.value;
-      addTask(formattedDate, content);
-    });
+		const formattedDate = formatTaskDate(dateInput.value);
+		const content = contentInput.value;
+		addTask(formattedDate, content);
+	});
 
 	return form;
 }
