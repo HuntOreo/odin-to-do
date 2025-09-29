@@ -1,7 +1,8 @@
 import { Elem } from "elekit";
 import { DateTime } from "luxon";
 import { formatTaskDate } from "../../helpers/events";
-import addTask from '../../helpers/eventHelpers/addSidebarTask';
+import addSidebarTask from '../../helpers/eventHelpers/addSidebarTask';
+import displayTask from '../../helpers/eventHelpers/displayTask';
 
 const TaskForm = function (taskList) {
 	const date = DateTime.now();
@@ -35,7 +36,8 @@ const TaskForm = function (taskList) {
 	taskBtn.addEventListener('click', () => {
 		const formattedDate = formatTaskDate(dateInput.value);
 		const content = contentInput.value;
-		addTask(taskList, formattedDate, content);
+		addSidebarTask(taskList, formattedDate, content);
+		displayTask(taskList);
 	});
 
 	return form;

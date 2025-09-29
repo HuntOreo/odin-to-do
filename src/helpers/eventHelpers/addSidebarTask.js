@@ -28,8 +28,9 @@ const addSidebarTask = (taskList, date, content) => {
   dayFolder.append(taskContainer.DOMElement);
   monthFolder.append(dayFolder);
   tasks.append(monthFolder);
-  taskList.push(task);
-  console.log(taskList);
+
+  taskList.push(task); // add task to global tracker
+
 }
 
 /*/////////////////////
