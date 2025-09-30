@@ -1,7 +1,4 @@
 import { Container } from 'elekit';
-import Sidebar from './Components/Sidebar';
-import Nav from './Components/Nav';
-import Content from './Components/Content';
 
 const App = function () {
   const app = new Container({ selectors: 'app' }, {
@@ -11,9 +8,6 @@ const App = function () {
 
   app.addClass('showSidebar');
 
-  const elements = [Nav(), Sidebar(), Content()]
-
-  app.appendEl(elements);
   return app;
 }
 
