@@ -3,31 +3,3 @@
 body, html {
   height: 100%;
 }
-
-.app { 
-  grid-template-areas: 
-    'header header header'
-    'sidebar content content'
-    'sidebar content content';
-  grid-template-rows: 100px 1fr;
-}
-
-.showSidebar {
-  grid-template-columns: 200px;
-}
-
-.hideSidebar { 
-  grid-template-columns: 50px;
-}
-
-.header {
-  grid-area: header;
-}
-
-.sidebar {
-  grid-area: sidebar;
-}
-
-.content {
-  grid-area: content;
-}
