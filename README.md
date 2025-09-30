@@ -1,5 +1,3 @@
-# Webpack Template
+# Odin To Do 
 
-This is a template repo to be used when creating simple webpack projects.
-
-By Hunter Oreair
+A to-do app made for the odin project.
