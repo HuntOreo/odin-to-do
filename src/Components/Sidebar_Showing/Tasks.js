@@ -1,17 +1,29 @@
-import { Container, Head } from 'elekit';
-import Month from './Month';
+import { Container } from 'elekit';
+import { buildFolders } from '../../Helpers/buildFolders';
 
 const Tasks = (tasksArr) => {
-  const container = new Container('tasks', { background: 'yellow' });
-
+  let tasksContainer = document.querySelector('.sidebar_showing .tasks');
+  
+  if (tasksContainer) {
+    tasksContainer.textContent = '';
+  } else  {
+    const container = new Container('tasks', { background: 'yellow' });
+    tasksContainer = container;
+  }
+  
   for (let task of tasksArr) {
-    if (task.date) {
-      const monthFolder = Month(task);
-      container.append(monthFolder);
+    if (tasksContainer.DOMElement) {
+      const folder = buildFolders(task, tasksContainer.DOMElement);
+      tasksContainer.DOMElement.append(folder);
+    } else {
+      const folder = buildFolders(task, tasksContainer);
+      tasksContainer.append(folder);
+
     }
   }
 
-  return container;
+  console.log(tasksContainer);
+  return tasksContainer;
 }
 
 export default Tasks;

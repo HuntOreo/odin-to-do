@@ -9,15 +9,31 @@ const tasks = [
     content: 'My Task',
     date: {
       day: 12,
-      month: 0o2,
+      month: '02',
       year: 2025,
     },
-  })
+  }),
+  new Task({
+    content: 'My Task',
+    date: {
+      day: 2,
+      month: '02',
+      year: 2025,
+    },
+  }),
+  new Task({
+    content: 'My Task',
+    date: {
+      day: 2,
+      month: '12',
+      year: 2025,
+    },
+  }),
+  
 ];
 
 const App = function () {
   const app = new Container({ selectors: 'app' });
-  app.addClass('showSidebar');
 
   app.append([Header(), Sidebar_Hidden(), Sidebar_Showing(tasks)]);
 
