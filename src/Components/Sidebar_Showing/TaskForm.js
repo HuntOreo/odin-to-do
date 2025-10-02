@@ -1,4 +1,5 @@
 import { Elem, Input, Button, Container } from 'elekit';
+import { openDateInput, updateDate } from '../../events/handleDateInput';
 
 const TaskForm = (taskArr) => {
   const container = new Container('form_container', { background: 'pink' })
@@ -15,13 +16,22 @@ const TaskForm = (taskArr) => {
       </div>
     `
   })
-  const dateInput = new Input({ type: 'date' }, {
-    width: '28px',
-    border: 'none'
+  // Hidden date input
+  const dateInput = new Input({ type: 'date', selectors: 'hiddenDateInput' }, {
+    display: 'none',
+    border: 'none',
   });
-  const button = new Button('Add');
+  // Clickable icon to display the date picker input
+  const calendarBtn = new Button({ content: `
+    <span class="material-symbols-outlined">date_range</span>
+  ` })
 
-  container.append([form, dateInput, button]);
+  dateInput.addListener('change', updateDate);
+  calendarBtn.addListener('click', openDateInput);
+
+  const addTaskBtn = new Button('Add');
+
+  container.append([form, dateInput, calendarBtn, addTaskBtn]);
   return container;
 }
 
