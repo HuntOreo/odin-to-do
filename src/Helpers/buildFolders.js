@@ -11,10 +11,10 @@ const buildFolders = (task, container) => {
         dayFolder = monthFolder.querySelector(`[data-day="${taskDay}"]`);
 
         if(dayFolder) {
-            buildDay(taskDay, dayFolder, monthFolder, true);
+            buildDay(task.title, taskDay, dayFolder, monthFolder, true);
         } else {
             dayFolder = new Container('day').DOMElement;
-            buildDay(taskDay, dayFolder, monthFolder, false);
+            buildDay(task.title, taskDay, dayFolder, monthFolder, false);
         }
     } else {
         monthFolder = new Container('month').DOMElement;
@@ -24,20 +24,19 @@ const buildFolders = (task, container) => {
         }).DOMElement
         monthFolder.dataset.month = taskMonth;
         monthFolder.append(header);
-        buildDay(taskDay, new Container('day').DOMElement, monthFolder, false);
+        buildDay(task.title, taskDay, new Container('day').DOMElement, monthFolder, false);
     }
 
     return monthFolder;
 } 
 
-function buildDay(date, day, month, exists) {
-    const taskEl = '<p>Untitled Task</p>';
+function buildDay(title, date, day, month, exists) {
     if(exists) {
         day.innerHTML += taskEl;
     } else {
         day.innerHTML = `
             <h3>${date}</h3>
-            ${taskEl}
+            ${title}
         `;
         day.dataset.day = date;
     }

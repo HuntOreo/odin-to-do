@@ -7,6 +7,7 @@ import Preview from './Components/Preview/Preview';
 
 const tasks = [
   new Task({
+    title: 'Task!',
     content: 'My Task',
     date: {
       day: 12,
