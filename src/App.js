@@ -1,8 +1,9 @@
 import { Container } from 'elekit';
 import Task from './Task_Class';
-import Header from './Components/Header';
-import Sidebar_Hidden from './Components/Sidebar_Hidden';
-import Sidebar_Showing from './Components/Sidebar_Showing';
+import Header from './Components/Header/Header';
+import Sidebar_Hidden from './Components/Sidebar_Hidden/Sidebar_Hidden';
+import Sidebar_Showing from './Components/Sidebar_Showing/Sidebar_Showing';
+import Preview from './Components/Preview/Preview';
 
 const tasks = [
   new Task({
@@ -35,7 +36,7 @@ const tasks = [
 const App = function () {
   const app = new Container({ selectors: 'app' });
 
-  app.append([Header(), Sidebar_Hidden(), Sidebar_Showing(tasks)]);
+  app.append([Header(), Sidebar_Hidden(), Sidebar_Showing(tasks), Preview(tasks)]);
 
   return app;
 }

@@ -1,6 +1,6 @@
 import { Elem, Container, Input, Button } from 'elekit';
-import TaskForm from './Sidebar_Showing/TaskForm';
-import Tasks from './Sidebar_Showing/Tasks';
+import TaskForm from './TaskForm';
+import Tasks from './Tasks';
 
 const Sidebar_Showing = (taskList) => {
   const container = new Container('sidebar_showing', { background: 'violet' });

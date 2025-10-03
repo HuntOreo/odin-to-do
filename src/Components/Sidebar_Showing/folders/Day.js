@@ -1,5 +1,4 @@
 import { Container, Head } from 'elekit';
-import { DateTime } from 'luxon';
 
 const Day = (task) => {
   const container = new Container('day');
