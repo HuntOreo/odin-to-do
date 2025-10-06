@@ -3,14 +3,14 @@ import { buildFolders } from '../../Helpers/buildFolders';
 
 const Tasks = (tasksArr) => {
   let tasksContainer = document.querySelector('.sidebar_showing .tasks');
-  
+
   if (tasksContainer) {
     tasksContainer.textContent = '';
-  } else  {
+  } else {
     const container = new Container('tasks', { background: 'yellow' });
     tasksContainer = container;
   }
-  
+
   for (let task of tasksArr) {
     if (tasksContainer.DOMElement) {
       const folder = buildFolders(task, tasksContainer.DOMElement);
@@ -22,7 +22,6 @@ const Tasks = (tasksArr) => {
     }
   }
 
-  console.log(tasksContainer);
   return tasksContainer;
 }
 
