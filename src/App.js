@@ -4,6 +4,7 @@ import Header from './Components/Header/Header';
 import Sidebar_Hidden from './Components/Sidebar_Hidden/Sidebar_Hidden';
 import Sidebar_Showing from './Components/Sidebar_Showing/Sidebar_Showing';
 import Preview from './Components/Preview/Preview';
+import Content from './Components/Content/Content';
 
 const tasks = [
   new Task({
@@ -31,13 +32,19 @@ const tasks = [
       year: 2025,
     },
   }),
-  
+
 ];
 
 const App = function () {
   const app = new Container({ selectors: 'app' });
 
-  app.append([Header(), Sidebar_Hidden(), Sidebar_Showing(tasks), Preview(tasks)]);
+  app.append([
+    Header(),
+    Sidebar_Hidden(),
+    Sidebar_Showing(tasks),
+    Preview(tasks),
+    Content(tasks),
+  ]);
 
   return app;
 }

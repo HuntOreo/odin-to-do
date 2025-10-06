@@ -3,3 +3,10 @@
 body, html {
   height: 100%;
 }
+
+.taskCard {
+  margin: 10px;
+  max-width: 200px;
+
+  background: lightblue;
+}

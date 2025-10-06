@@ -1,7 +1,7 @@
 import { Container } from 'elekit';
 import { buildFolders } from '../../Helpers/buildFolders';
 
-const Tasks = (tasksArr) => {
+const Tasks = (taskList) => {
   let tasksContainer = document.querySelector('.sidebar_showing .tasks');
 
   if (tasksContainer) {
@@ -11,12 +11,12 @@ const Tasks = (tasksArr) => {
     tasksContainer = container;
   }
 
-  for (let task of tasksArr) {
+  for (let task of taskList) {
     if (tasksContainer.DOMElement) {
-      const folder = buildFolders(task, tasksContainer.DOMElement);
+      const folder = buildFolders(task, tasksContainer.DOMElement, taskList);
       tasksContainer.DOMElement.append(folder);
     } else {
-      const folder = buildFolders(task, tasksContainer);
+      const folder = buildFolders(task, tasksContainer, taskList);
       tasksContainer.append(folder);
 
     }
