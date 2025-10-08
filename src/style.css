@@ -10,3 +10,35 @@ body, html {
 
   background: lightblue;
 }
+
+.app {
+  height: 100%;
+  display: grid;
+  grid-template-areas: 
+  "header header header header"
+  "sidebar_showing content content content";
+  grid-template-rows: 100px auto;
+  grid-template-columns: minmax(100px, 300px) auto;
+}
+
+header { 
+  grid-area: header;
+  height: 100px;
+}
+
+.sidebar_hidden {
+  display: none;
+}
+
+.sidebar_showing {
+  grid-area: sidebar_showing;
+}
+
+.taskCreator {
+  grid-area: taskCreator;
+  display: none;
+}
+
+.content {
+  grid-area: content;
+}
