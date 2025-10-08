@@ -10,3 +10,68 @@ body, html {
 
   background: lightblue;
 }
+
+.app {
+  height: 100%;
+  display: grid;
+}
+
+/* default */
+.app {
+  grid-template-areas: 
+  "header header header header"
+  "sidebar_showing content content content";
+  grid-template-rows: 100px auto;
+  grid-template-columns: minmax(100px, 300px) auto;
+}
+
+/* Sidebar hidden */
+.hideSidebar {
+  grid-template-areas:
+    "header header header header"
+    "sidebar_hidden content content content"
+  ;
+  grid-template-columns: 50px auto;
+}
+/* sidebar + taskcreator */
+.sidebar_taskCreator {
+  grid-template-areas: 
+    "header header header header"
+    "sidebar_showing taskCreator content content"
+  ;
+  grid-template-columns: 150px 200px auto;
+}
+/* taskCreator */ 
+.showTaskCreator {
+  grid-template-areas: 
+    "header header header header"
+    "sidebar_hidden taskCreator content content"
+  ;
+  grid-template-columns: 50px 200px auto;
+}
+
+header { 
+  grid-area: header;
+  height: 100px;
+}
+
+.sidebar_hidden {
+  grid-area: sidebar_hidden;
+}
+
+.sidebar_showing {
+  grid-area: sidebar_showing;
+}
+
+.taskCreator {
+  grid-area: taskCreator;
+}
+
+.content {
+  grid-area: content;
+}
+
+/* Hide elements */
+.hideElem {
+  display: none;
+}

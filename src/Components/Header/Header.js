@@ -1,14 +1,16 @@
 import { Button, Elem, Head } from 'elekit';
+import toggleSidebar from '../../Helpers/events/toggleSidebar';
 
 const Header = function () {
   const header = new Elem({
     tag: 'header'
   }, { background: 'lightgreen' });
 
-  const toggleSidebar = new Button('Toggle Sidebar');
+  const toggleSideBtn = new Button('Toggle Sidebar');
+  toggleSideBtn.addListener('click', toggleSidebar);
   const logo = new Head('LOGO');
 
-  header.append([toggleSidebar, logo]);
+  header.append([toggleSideBtn, logo]);
   return header;
 }
 

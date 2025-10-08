@@ -1,7 +1,7 @@
 import { Button, Container } from 'elekit';
 
 const Sidebar_Hidden = () => {
-  const container = new Container('sidebar_hidden', { background: 'skyblue' });
+  const container = new Container({selectors: ['sidebar_hidden', 'hideElem']}, { background: 'skyblue' });
   const openPreview = new Button({
     content: '+',
     selectors: 'open_preview',
