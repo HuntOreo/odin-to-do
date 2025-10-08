@@ -4,7 +4,6 @@ const updateTasks = (task, taskList) => {
 	taskList.push(task);
 
 	Tasks(taskList);
-
 }
 
 export {

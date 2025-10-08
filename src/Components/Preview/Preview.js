@@ -1,11 +1,11 @@
 import { Container } from "elekit"
 import Form from "./PreviewForm";
 
-const Preview = (taskList, task) => {
-	const container = new Container('taskCreator');
+const Preview = (task, taskList) => {
+	const container = new Container({selectors: ['taskCreator', 'hideElem']});
 
 	if(task) {
-		container.append(Form(taskList, task));
+		container.append(Form(task, taskList));
 	} else {
 		container.DOMElement.textContent = '';
 	}

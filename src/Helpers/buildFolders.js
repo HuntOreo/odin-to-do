@@ -1,6 +1,7 @@
 import { Container, Head } from "elekit";
 import { DateTime } from "luxon";
 import renderDayTasks from './events/renderDayTasks';
+import toggleTaskEditor from "./events/toggleTaskEditor";
 
 
 const buildFolders = (task, container, taskList) => {
@@ -34,13 +35,26 @@ const buildFolders = (task, container, taskList) => {
 
 function buildDay(id, title, date, day, month, exists, taskList) {
 	if (exists) {
-		day.innerHTML += `<p data-id="${id}">${title}</p>`;
+		day.innerHTML += `        
+			<p data-id="${id}">${title}
+				<button class="editTaskBtn" onclick="${() => toggleTaskEditor(id, taskList)}">
+					⚙️
+				</button>
+			</p>`;
+		const thisEditBtn = day.querySelector(`[data-id="${id}"] .editTaskBtn`);
+		thisEditBtn.addEventListener('click', () => toggleTaskEditor(id, taskList))
 	} else {
 		day.addEventListener('click', () => renderDayTasks(day, taskList));
 		day.innerHTML = `
         <h3>${date}</h3>
-        <p data-id="${id}">${title}</p>
+        <p data-id="${id}">${title}
+					<button class="editTaskBtn">
+						⚙️
+					</button>
+				</p>
       `;
+		const thisEditBtn = day.querySelector(`[data-id="${id}"] .editTaskBtn`);
+		thisEditBtn.addEventListener('click', () => toggleTaskEditor(id, taskList))
 		day.dataset.day = date;
 	}
 

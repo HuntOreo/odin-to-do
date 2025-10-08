@@ -1,13 +1,13 @@
 import { Container, Elem, Head } from "elekit"
 
 
-const Form = (taskList, task) => {
+const Form = (task, taskList) => {
 	const container = new Container('formContainer');
 	const date = new Head({ 
 		size: 1,
-		content: `
-      ${task.date.month}/${task.date.day}
-    `});
+		content: 
+      task.date ? `${task.date.month}/${task.date.day}` : 'No Date'
+    });
 	const form = new Elem({
 		tag: 'form',
 		content: `
@@ -31,6 +31,7 @@ const Form = (taskList, task) => {
 		`
 	});
 
+	console.log(form);
 	container.append([date, form]);
 	return container;
 }
