@@ -42,8 +42,12 @@ body, html {
   grid-template-columns: 150px 200px auto;
 }
 /* taskCreator */ 
-.showSidebar {
-
+.showTaskCreator {
+  grid-template-areas: 
+    "header header header header"
+    "sidebar_hidden taskCreator content content"
+  ;
+  grid-template-columns: 50px 200px auto;
 }
 
 header { 
