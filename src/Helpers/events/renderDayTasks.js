@@ -6,7 +6,6 @@ function renderDayTasks(day, taskList) {
 
   for (let task of tasks) {
     const currentTask = taskList.filter(child => child.id == task.dataset.id)[0];
-    console.log(currentTask);
     contentContainer.innerHTML += `
       <div class='taskCard'>
         <h2>${currentTask.title}</h2>
