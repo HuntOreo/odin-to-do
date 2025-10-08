@@ -5,15 +5,15 @@ const toggleSidebar = () => {
 
   showingSide.classList.toggle('hideElem');
   hiddenSide.classList.toggle('hideElem');
-
+  
   if (
-    app.classList.contains('sidebar_taskCreator') ||
-    app.classList.contains('showTaskCreator')) {
-      app.classList.toggle('sidebar_taskCreator');
-      app.classList.toggle('showTaskCreator');
+    app.classList.contains('showingSidebar_withEditor') ||
+    app.classList.contains('hiddenSidebar_withEditor')) {
+      app.classList.toggle('showingSidebar_withEditor');
+      app.classList.toggle('hiddenSidebar_withEditor');
+  } else {
+    app.classList.toggle('hiddenSidebar_noEditor');
   }
-
-  app.classList.toggle('hideSidebar');
 }
 
 export default toggleSidebar;

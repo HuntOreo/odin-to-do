@@ -1,13 +1,25 @@
 import Preview from "../../Components/Preview/Preview";
-import Form from "../../Components/Preview/PreviewForm";
 
 const toggleTaskEditor = (id, taskList) => {
-  const task = taskList.filter(child => child.id == id)[0];
+  let task;
+  if (id === undefined) {
+    task = taskList[0];
+  } else {
+    task = taskList.filter(child => child.id == id)[0];
+  }
   const app = document.querySelector('.app');
   const taskCreator = app.querySelector('.taskCreator');
-  
-  app.classList.toggle('sidebar_taskCreator');
+
   taskCreator.classList.toggle('hideElem');
+
+  if (
+    app.classList.contains('hiddenSidebar_withEditor') || 
+    app.classList.contains('hiddenSidebar_noEditor')) {
+      app.classList.toggle('hiddenSidebar_withEditor');
+      app.classList.toggle('hiddenSidebar_noEditor');
+    }
+  
+  app.classList.toggle('showingSidebar_withEditor');
   Preview(task, taskList);
 }
 

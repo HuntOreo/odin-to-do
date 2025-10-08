@@ -40,7 +40,7 @@ const App = function () {
 
   app.append([
     Header(),
-    Sidebar_Hidden(),
+    Sidebar_Hidden(tasks),
     Sidebar_Showing(tasks),
     Preview(tasks),
     Content(tasks),

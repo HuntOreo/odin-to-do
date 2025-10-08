@@ -26,7 +26,7 @@ body, html {
 }
 
 /* Sidebar hidden */
-.hideSidebar {
+.hiddenSidebar_noEditor {
   grid-template-areas:
     "header header header header"
     "sidebar_hidden content content content"
@@ -34,15 +34,15 @@ body, html {
   grid-template-columns: 50px auto;
 }
 /* sidebar + taskcreator */
-.sidebar_taskCreator {
+.showingSidebar_withEditor {
   grid-template-areas: 
     "header header header header"
     "sidebar_showing taskCreator content content"
   ;
   grid-template-columns: 150px 200px auto;
 }
-/* taskCreator */ 
-.showTaskCreator {
+/* hiddenSidebar + taskCreator */ 
+.hiddenSidebar_withEditor {
   grid-template-areas: 
     "header header header header"
     "sidebar_hidden taskCreator content content"
