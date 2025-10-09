@@ -14,7 +14,9 @@ const app = document.querySelector('.app');
 
     app.classList.toggle('showingSidebar_withEditor');
   } else {
-		if (!e.target.closest('taskCreator') && !e.target.classList.contains('editTaskBtn')) {
+		if (!e.target.closest('.taskCreator') && 
+			!e.target.classList.contains('editTaskBtn') &&
+			!e.target.closest('.taskCard')) {
 			// if task creator is open, 
 			// check if an element is clicked outside of the container
 			// and close the task creator if true
