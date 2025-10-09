@@ -1,7 +1,8 @@
 import { Container, Head } from "elekit";
 import { DateTime } from "luxon";
-import renderDayTasks from '../../../Helpers/events/renderContentTasks';
+import renderDayTasks from '../../../Helpers/events/renderContentTasks'
 import renderPreview from "../../../Helpers/events/renderPreview";
+import toggleTaskCreator from "../../../Helpers/events/toggleTaskCreator";
 
 
 const buildFolders = (task, container, taskList) => {
@@ -12,23 +13,12 @@ const buildFolders = (task, container, taskList) => {
 
 	if (monthFolder) {
 		dayFolder = monthFolder.querySelector(`[data-day="${taskDay}"]`);
+
 		if (dayFolder) {
-			buildDay(
-				task,
-				dayFolder,
-				monthFolder,
-				taskList,
-				true,
-			);
+			buildDay(task.id, task.title, taskDay, dayFolder, monthFolder, true, taskList);
 		} else {
 			dayFolder = new Container('day').DOMElement;
-			buildDay(
-				task,
-				dayFolder,
-				monthFolder,
-				taskList,
-				false,
-			);
+			buildDay(task.id, task.title, taskDay, dayFolder, monthFolder, false, taskList);
 		}
 	} else {
 		monthFolder = new Container('month').DOMElement;
@@ -36,50 +26,41 @@ const buildFolders = (task, container, taskList) => {
 			size: 2,
 			content: DateTime.fromObject(task.date).toFormat('LLLL'),
 		}).DOMElement
-
 		monthFolder.dataset.month = taskMonth;
 		monthFolder.append(header);
-		buildDay(
-			task,
-			new Container('day').DOMElement,
-			monthFolder,
-			taskList,
-			false
-		);
+		buildDay(task.id, task.title, taskDay, new Container('day').DOMElement, monthFolder, false, taskList);
 	}
 
 	return monthFolder;
 }
 
-function buildDay(task, dayFolder, monthFolder, taskList, exists) {
-
+function buildDay(id, title, date, day, month, exists, taskList) {
 	if (exists) {
-		dayFolder.innerHTML += `        
-			<p data-id="${task.id}">${task.title}
+		day.innerHTML += `        
+			<p data-id="${id}">${title}
 				<button class="editTaskBtn">
 					⚙️
 				</button>
 			</p>`;
 	} else {
-		dayFolder.innerHTML += `
-      <h3>${task.date.day}</h3>
-      <p data-id="${task.id}">${task.title}
-				<button class="editTaskBtn">
-					⚙️
-				</button>
-			</p>
-    `;
-		dayFolder.dataset.day = task.date.day;
+		day.addEventListener('click', () => renderDayTasks(day, taskList));
+		day.innerHTML = `
+        <h3>${date}</h3>
+        <p data-id="${id}">${title}
+			<button class="editTaskBtn">
+			⚙️
+			</button>
+		</p>`;
+		day.dataset.day = date;
 	}
 
-	dayFolder.addEventListener('click', () => renderDayTasks(dayFolder, taskList));
+	month.append(day);
 
-	const thisEditBtn = dayFolder.querySelector(`[data-id="${task.id}"] > button`);
+	const thisEditBtn = day.querySelector(`[data-id="${id}"] .editTaskBtn`);
 	thisEditBtn.addEventListener('click', (e) => {
-		renderPreview(task.id, taskList)
-	}
-	);
-	monthFolder.append(dayFolder);
+		toggleTaskCreator(e);
+		renderPreview(id, taskList)
+	})
 }
 
 export {

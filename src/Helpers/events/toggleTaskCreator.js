@@ -1,10 +1,9 @@
 const toggleTaskCreator = (e) => {
-	const app = document.querySelector('.app');
+const app = document.querySelector('.app');
   const taskCreator = app.querySelector('.taskCreator');
 
   if (taskCreator.classList.contains('hideElem')) {
     taskCreator.classList.toggle('hideElem');
-		alert('clkucjec');
     if (
       app.classList.contains('hiddenSidebar_withEditor') ||
       app.classList.contains('hiddenSidebar_noEditor')
@@ -15,7 +14,6 @@ const toggleTaskCreator = (e) => {
 
     app.classList.toggle('showingSidebar_withEditor');
   } else {
-		alert('clicked!');
 		if (!e.target.closest('taskCreator') && !e.target.classList.contains('editTaskBtn')) {
 			// if task creator is open, 
 			// check if an element is clicked outside of the container
