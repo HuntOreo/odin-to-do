@@ -1,5 +1,5 @@
 import { Container } from 'elekit';
-import toggleTaskEditor from '../../Helpers/events/toggleTaskEditor';
+import renderPreview from '../../Helpers/events/renderPreview';
 
 const Content = (taskList) => {
   let container = document.querySelector('.content');
@@ -11,13 +11,4 @@ const Content = (taskList) => {
   }
   return container;
 }
-
-function selectTask(element, taskList) {
-  if (element.closest('.taskCard')) {
-    const taskId = element.dataset.id;
-    toggleTaskEditor(taskId, taskList);
-  }
-}
-
-
 export default Content;

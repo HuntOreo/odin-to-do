@@ -51,4 +51,14 @@ const App = function () {
   return app;
 }
 
+App().addListener('click', (e) => {
+  const app = App().DOMElement;
+  console.log('clicked!');
+  if (
+    app.classList.contains('showingSidebar_withEditor') ||
+    app.classList.contains('hiddenSidebar_withEditor')
+  ) {
+  }
+})
+
 export default App;

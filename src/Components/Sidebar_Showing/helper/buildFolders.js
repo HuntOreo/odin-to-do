@@ -1,7 +1,7 @@
 import { Container, Head } from "elekit";
 import { DateTime } from "luxon";
 import renderDayTasks from '../../../Helpers/events/renderContentTasks';
-import toggleTaskEditor from "../../../Helpers/events/toggleTaskEditor";
+import renderPreview from "../../../Helpers/events/renderPreview";
 
 
 const buildFolders = (task, container, taskList) => {
@@ -76,7 +76,7 @@ function buildDay(task, dayFolder, monthFolder, taskList, exists) {
 
 	const thisEditBtn = dayFolder.querySelector(`[data-id="${task.id}"] > button`);
 	thisEditBtn.addEventListener('click', (e) => {
-		toggleTaskEditor(task.id, taskList)
+		renderPreview(task.id, taskList)
 	}
 	);
 	monthFolder.append(dayFolder);

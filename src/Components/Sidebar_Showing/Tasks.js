@@ -14,14 +14,10 @@ const Tasks = (taskList) => {
   for (let task of taskList) {
     if (tasksContainer.DOMElement) {
       const folder = buildFolders(task, tasksContainer.DOMElement, taskList);
-      console.log(folder)
       tasksContainer.DOMElement.append(folder);
     } else {
       const folder = buildFolders(task, tasksContainer, taskList);
-      console.log(folder)
-
       tasksContainer.append(folder);
-
     }
   }
 
