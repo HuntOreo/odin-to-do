@@ -10,16 +10,21 @@ const toggleTaskEditor = (id, taskList) => {
   const app = document.querySelector('.app');
   const taskCreator = app.querySelector('.taskCreator');
 
-  taskCreator.classList.toggle('hideElem');
+  if (taskCreator.classList.contains('hideElem')) {
+    taskCreator.classList.toggle('hideElem');
 
-  if (
-    app.classList.contains('hiddenSidebar_withEditor') || 
-    app.classList.contains('hiddenSidebar_noEditor')) {
+    if (
+      app.classList.contains('hiddenSidebar_withEditor') ||
+      app.classList.contains('hiddenSidebar_noEditor')) {
       app.classList.toggle('hiddenSidebar_withEditor');
       app.classList.toggle('hiddenSidebar_noEditor');
     }
-  
-  app.classList.toggle('showingSidebar_withEditor');
+
+    app.classList.toggle('showingSidebar_withEditor');
+  } else {
+
+  }
+
   Preview(task, taskList);
 }
 

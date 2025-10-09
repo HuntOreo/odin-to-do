@@ -12,19 +12,21 @@ const tasks = [
     content: 'My Task',
     date: {
       day: 12,
-      month: '02',
+      month: '2',
       year: 2025,
     },
   }),
   new Task({
+    title: 'IDK',
     content: 'My Task',
     date: {
       day: 2,
-      month: '02',
+      month: '2',
       year: 2025,
     },
   }),
   new Task({
+    title: 'Yippee',
     content: 'My Task',
     date: {
       day: 2,

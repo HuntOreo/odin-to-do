@@ -1,5 +1,5 @@
 import { Container } from 'elekit';
-import { buildFolders } from '../../Helpers/buildFolders';
+import { buildFolders } from './helper/buildFolders';
 
 const Tasks = (taskList) => {
   let tasksContainer = document.querySelector('.sidebar_showing .tasks');
