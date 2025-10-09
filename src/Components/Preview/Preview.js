@@ -2,7 +2,6 @@ import { Container } from "elekit"
 import Form from "./PreviewForm";
 
 const Preview = (task, taskList) => {
-	console.log(task);
 	let container = document.querySelector('.taskCreator');
 	if (container) {
 		container.textContent = '';

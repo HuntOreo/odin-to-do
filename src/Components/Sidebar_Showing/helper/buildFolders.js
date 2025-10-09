@@ -14,23 +14,20 @@ const buildFolders = (task, container, taskList) => {
 		dayFolder = monthFolder.querySelector(`[data-day="${taskDay}"]`);
 		if (dayFolder) {
 			buildDay(
-				task.id,
-				task.title,
-				taskDay,
+				task,
 				dayFolder,
 				monthFolder,
+				taskList,
 				true,
-				taskList);
+			);
 		} else {
 			dayFolder = new Container('day').DOMElement;
 			buildDay(
-				task.id,
-				task.title,
-				taskDay,
+				task,
 				dayFolder,
 				monthFolder,
+				taskList,
 				false,
-				taskList
 			);
 		}
 	} else {
@@ -43,44 +40,46 @@ const buildFolders = (task, container, taskList) => {
 		monthFolder.dataset.month = taskMonth;
 		monthFolder.append(header);
 		buildDay(
-			task.id,
-			task.title,
-			taskDay,
+			task,
 			new Container('day').DOMElement,
 			monthFolder,
-			false,
-			taskList
+			taskList,
+			false
 		);
 	}
 
 	return monthFolder;
 }
 
-function buildDay(id, title, date, day, month, exists, taskList) {
+function buildDay(task, dayFolder, monthFolder, taskList, exists) {
+
 	if (exists) {
-		day.innerHTML += `        
-			<p data-id="${id}">${title}
+		dayFolder.innerHTML += `        
+			<p data-id="${task.id}">${task.title}
 				<button class="editTaskBtn">
 					⚙️
 				</button>
 			</p>`;
 	} else {
-		day.innerHTML = `
-      <h3>${date}</h3>
-      <p data-id="${id}">${title}
+		dayFolder.innerHTML += `
+      <h3>${task.date.day}</h3>
+      <p data-id="${task.id}">${task.title}
 				<button class="editTaskBtn">
 					⚙️
 				</button>
 			</p>
     `;
-		day.dataset.day = date;
+		dayFolder.dataset.day = task.date.day;
 	}
 
-	day.addEventListener('click', () => renderDayTasks(day, taskList));
+	dayFolder.addEventListener('click', () => renderDayTasks(dayFolder, taskList));
 
-	const thisEditBtn = day.querySelector(`[data-id="${id}"] .editTaskBtn`);
-	thisEditBtn.addEventListener('click', (e) => toggleTaskEditor(id, taskList, e));
-	month.append(day);
+	const thisEditBtn = dayFolder.querySelector(`[data-id="${task.id}"] > button`);
+	thisEditBtn.addEventListener('click', (e) => {
+		toggleTaskEditor(task.id, taskList)
+	}
+	);
+	monthFolder.append(dayFolder);
 }
 
 export {

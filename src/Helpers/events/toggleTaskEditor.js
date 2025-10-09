@@ -26,6 +26,7 @@ const toggleTaskEditor = (id, taskList) => {
 
   }
 
+  console.log(task);
   Preview(task, taskList);
 }
 
