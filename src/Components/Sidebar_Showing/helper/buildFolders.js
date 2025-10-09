@@ -1,6 +1,6 @@
 import { Container, Head } from "elekit";
 import { DateTime } from "luxon";
-import renderDayTasks from '../../../Helpers/events/renderDayTasks';
+import renderDayTasks from '../../../Helpers/events/renderContentTasks';
 import toggleTaskEditor from "../../../Helpers/events/toggleTaskEditor";
 
 
@@ -65,7 +65,6 @@ function buildDay(id, title, date, day, month, exists, taskList) {
 				</button>
 			</p>`;
 	} else {
-		day.addEventListener('click', () => renderDayTasks(day, taskList));
 		day.innerHTML = `
       <h3>${date}</h3>
       <p data-id="${id}">${title}
@@ -76,6 +75,8 @@ function buildDay(id, title, date, day, month, exists, taskList) {
     `;
 		day.dataset.day = date;
 	}
+
+	day.addEventListener('click', () => renderDayTasks(day, taskList));
 
 	const thisEditBtn = day.querySelector(`[data-id="${id}"] .editTaskBtn`);
 	thisEditBtn.addEventListener('click', (e) => toggleTaskEditor(id, taskList, e));

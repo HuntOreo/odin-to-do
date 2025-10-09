@@ -15,7 +15,8 @@ const toggleTaskEditor = (id, taskList) => {
 
     if (
       app.classList.contains('hiddenSidebar_withEditor') ||
-      app.classList.contains('hiddenSidebar_noEditor')) {
+      app.classList.contains('hiddenSidebar_noEditor')
+    ) {
       app.classList.toggle('hiddenSidebar_withEditor');
       app.classList.toggle('hiddenSidebar_noEditor');
     }

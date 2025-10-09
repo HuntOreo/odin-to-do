@@ -44,7 +44,7 @@ const App = function () {
     Header(),
     Sidebar_Hidden(tasks),
     Sidebar_Showing(tasks),
-    Preview(tasks),
+    Preview(),
     Content(tasks),
   ]);
 
