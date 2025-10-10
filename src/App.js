@@ -17,6 +17,15 @@ const tasks = [
     },
   }),
   new Task({
+    title: 'Task 2!',
+    content: 'My other Task',
+    date: {
+      day: 12,
+      month: '2',
+      year: 2025,
+    },
+  }),
+  new Task({
     title: 'IDK',
     content: 'My Task',
     date: {

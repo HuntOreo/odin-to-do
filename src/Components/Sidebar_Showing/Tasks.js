@@ -10,17 +10,12 @@ const Tasks = (taskList) => {
     const container = new Container('tasks', { background: 'yellow' });
     tasksContainer = container;
   }
+  if (tasksContainer.DOMElement) {
+    buildFolders(taskList, tasksContainer.DOMElement );
+  } else {
+    buildFolders(taskList, tasksContainer);
 
-  for (let task of taskList) {
-    if (tasksContainer.DOMElement) {
-      const folder = buildFolders(task, tasksContainer.DOMElement, taskList);
-      tasksContainer.DOMElement.append(folder);
-    } else {
-      const folder = buildFolders(task, tasksContainer, taskList);
-      tasksContainer.append(folder);
-    }
   }
-
   return tasksContainer;
 }
 

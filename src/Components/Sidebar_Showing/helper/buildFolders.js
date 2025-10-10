@@ -1,66 +1,70 @@
-import { Container, Head } from "elekit";
+import { Container, Head, Elem } from "elekit";
 import { DateTime } from "luxon";
 import renderDayTasks from '../../../Helpers/events/renderContentTasks'
 import renderPreview from "../../../Helpers/events/renderPreview";
 import toggleTaskCreator from "../../../Helpers/events/toggleTaskCreator";
 
 
-const buildFolders = (task, container, taskList) => {
-	const taskMonth = task.date.month;
-	const taskDay = task.date.day;
-	let dayFolder, monthFolder;
-	monthFolder = container.querySelector(`[data-month="${taskMonth}"]`);
+const buildFolders = (taskList, container) => {
+	const months = {};
 
-	if (monthFolder) {
-		dayFolder = monthFolder.querySelector(`[data-day="${taskDay}"]`);
-
-		if (dayFolder) {
-			buildDay(task.id, task.title, taskDay, dayFolder, monthFolder, true, taskList);
-		} else {
-			dayFolder = new Container('day').DOMElement;
-			buildDay(task.id, task.title, taskDay, dayFolder, monthFolder, false, taskList);
+	for(let child of taskList) {
+		if(!child.date) {
+			months.misc = []
 		}
-	} else {
-		monthFolder = new Container('month').DOMElement;
-		const header = new Head({
-			size: 2,
-			content: DateTime.fromObject(task.date).toFormat('LLLL'),
-		}).DOMElement
-		monthFolder.dataset.month = taskMonth;
-		monthFolder.append(header);
-		buildDay(task.id, task.title, taskDay, new Container('day').DOMElement, monthFolder, false, taskList);
+		if (!months[child.date.month]) {
+			months[child.date.month] = []
+		}
 	}
+	for (let month in months) {
+		for (let child of taskList) {
+			if(!child.date) {
+				months.misc.push(child);
+			}
 
-	return monthFolder;
-}
-
-function buildDay(id, title, date, day, month, exists, taskList) {
-	if (exists) {
-		day.innerHTML += `        
-			<p data-id="${id}">${title}
-				<button class="editTaskBtn">
-					⚙️
-				</button>
-			</p>`;
-	} else {
-		day.addEventListener('click', () => renderDayTasks(day, taskList));
-		day.innerHTML = `
-        <h3>${date}</h3>
-        <p data-id="${id}">${title}
-			<button class="editTaskBtn">
-			⚙️
-			</button>
-		</p>`;
-		day.dataset.day = date;
+			if (month == child.date.month) {
+				months[month].push(child)
+			}
+		}
 	}
+	
+	for(let month in months) {
+		const thisMonth = months[month];
 
-	month.append(day);
+		const monthFolder = new Container({selectors: ['folder', 'month']});
+		const monthFormatted = DateTime.fromObject(thisMonth[0].date).toFormat('LLLL')
+		const monthHeader = new Head({size: 2, content: monthFormatted});
+		monthFolder.append(monthHeader);
 
-	const thisEditBtn = day.querySelector(`[data-id="${id}"] .editTaskBtn`);
-	thisEditBtn.addEventListener('click', (e) => {
-		toggleTaskCreator(e);
-		renderPreview(id, taskList)
-	})
+		const days = {}
+		for (let task of thisMonth) {
+			days[task.date.day] = thisMonth.filter(child => {
+				return child.date.day == task.date.day;
+			})
+		}
+
+		for (let day in days) {
+			const thisDay = days[day];
+			
+			const dayFolder = new Container({selectors: ['folder', 'day']});
+			const dayHeader = new Head({size: 3, content: thisDay[0].date.day});
+			dayFolder.append(dayHeader);
+			
+			for (let task of days[day]) {
+				const taskFolder = new Elem({selectors: 'taskFolder', content: `
+						<div class="taskFolder">
+							<p>
+								${task.content}	
+								<button class="editTaskBtn">⚙️</button>
+							</p>
+						</div>
+				`});
+				dayFolder.append(taskFolder);
+			}
+			monthFolder.append(dayFolder);
+		}
+		container.append(monthFolder.DOMElement);
+	}
 }
 
 export {
