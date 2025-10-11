@@ -4,11 +4,11 @@ import { Container, Elem, Head } from "elekit"
 const Form = (task, taskList) => {
 	const taskDateParam = task.date;
 	const container = new Container('formContainer');
-	const date = new Head({ 
+	const date = new Head({
 		size: 1,
-		content: 
-      taskDateParam ? `${taskDateParam.month}/${taskDateParam.day}` : 'No Date'
-    });
+		content:
+			taskDateParam ? `${taskDateParam.month}/${taskDateParam.day}` : 'No Date'
+	});
 	const form = new Elem({
 		tag: 'form',
 		content: `
@@ -16,7 +16,7 @@ const Form = (task, taskList) => {
 					<input id="title" name="title" placeholder="Title..." value="${task.title}" required>
 				</div>
 				<div class="wrapper">
-					<textarea id="content" name="content" placeholder="Content..." value="${task.content}"></textarea>
+					<textarea id="content" name="content" placeholder="Content...">${task.content}</textarea>
 				</div>
 				<div class="wrapper checkboxes">
 					<label for="priorityBox">

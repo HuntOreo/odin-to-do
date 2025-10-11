@@ -1,6 +1,6 @@
 import { Container, Head, Elem } from "elekit";
 import { DateTime } from "luxon";
-import renderDayTasks from '../../../Helpers/events/renderContentTasks'
+import renderContentTasks from '../../../Helpers/events/renderContentTasks'
 import renderPreview from "../../../Helpers/events/renderPreview";
 import toggleTaskCreator from "../../../Helpers/events/toggleTaskCreator";
 
@@ -8,8 +8,8 @@ import toggleTaskCreator from "../../../Helpers/events/toggleTaskCreator";
 const buildFolders = (taskList, container) => {
 	const months = {};
 
-	for(let child of taskList) {
-		if(!child.date) {
+	for (let child of taskList) {
+		if (!child.date) {
 			months.misc = []
 		}
 		if (!months[child.date.month]) {
@@ -18,7 +18,7 @@ const buildFolders = (taskList, container) => {
 	}
 	for (let month in months) {
 		for (let child of taskList) {
-			if(!child.date) {
+			if (!child.date) {
 				months.misc.push(child);
 			}
 
@@ -27,13 +27,13 @@ const buildFolders = (taskList, container) => {
 			}
 		}
 	}
-	
-	for(let month in months) {
+
+	for (let month in months) {
 		const thisMonth = months[month];
 
-		const monthFolder = new Container({selectors: ['folder', 'month']});
+		const monthFolder = new Container({ selectors: ['folder', 'month'] });
 		const monthFormatted = DateTime.fromObject(thisMonth[0].date).toFormat('LLLL')
-		const monthHeader = new Head({size: 2, content: monthFormatted});
+		const monthHeader = new Head({ size: 2, content: monthFormatted });
 		monthFolder.append(monthHeader);
 
 		const days = {}
@@ -45,20 +45,31 @@ const buildFolders = (taskList, container) => {
 
 		for (let day in days) {
 			const thisDay = days[day];
-			
-			const dayFolder = new Container({selectors: ['folder', 'day']});
-			const dayHeader = new Head({size: 3, content: thisDay[0].date.day});
+
+			const dayFolder = new Container({ selectors: ['folder', 'day'] });
+			const dayHeader = new Head({ size: 3, content: thisDay[0].date.day });
 			dayFolder.append(dayHeader);
-			
+
+			dayFolder.addListener('click', (e) => {
+
+			})
+
 			for (let task of days[day]) {
-				const taskFolder = new Elem({selectors: 'taskFolder', content: `
+				const taskFolder = new Elem({
+					selectors: 'taskFolder', content: `
 						<div class="taskFolder">
 							<p>
-								${task.content}	
+								${task.title}	
 								<button class="editTaskBtn">⚙️</button>
 							</p>
 						</div>
 				`});
+
+				const btn = taskFolder.DOMElement.querySelector('.editTaskBtn');
+				btn.addEventListener('click', (e) => {
+					toggleTaskCreator(e);
+					renderPreview(task.id, taskList);
+				})
 				dayFolder.append(taskFolder);
 			}
 			monthFolder.append(dayFolder);
