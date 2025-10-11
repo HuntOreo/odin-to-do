@@ -3,19 +3,23 @@ import Form from "./PreviewForm";
 
 const Preview = (task, taskList) => {
 	let container = document.querySelector('.taskCreator');
-	if(container) {
+	if (container) {
 		container.textContent = '';
 		container.append(Form(task, taskList).DOMElement);
 	} else {
-		container = new Container({selectors: ['taskCreator', 'hideElem']}, {background: 'orange'});
-		if(task) {
+		container = new Container({
+			selectors: ['taskCreator', 'hideElem']
+		},
+			{ background: 'orange' }
+		);
+		if (task) {
 			container.append(Form(task, taskList));
 		} else {
 			container.DOMElement.textContent = '';
 		}
 	}
 
-  return container;
+	return container;
 }
 
 export default Preview

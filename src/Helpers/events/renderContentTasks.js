@@ -1,3 +1,5 @@
+import Preview from '../../Components/Preview/Preview';
+
 function renderDayTasks(day, taskList) {
   const contentContainer = document.querySelector('.content');
   contentContainer.textContent = '';
@@ -7,7 +9,7 @@ function renderDayTasks(day, taskList) {
   for (let task of tasks) {
     const currentTask = taskList.filter(child => child.id == task.dataset.id)[0];
     contentContainer.innerHTML += `
-      <div class='taskCard'>
+      <div class='taskCard' data-id="${currentTask.id}">
         <h2>${currentTask.title}</h2>
         <p>${currentTask.content ? currentTask.content : 'Content...'}</p>
         <div class='container'>
@@ -28,7 +30,14 @@ function renderDayTasks(day, taskList) {
         </div>
       </div>
     `
+
+    const thisTaskCard =
+      contentContainer.querySelector(`[data-id="${currentTask.id}"]`);
+    thisTaskCard.addEventListener('click', () => {
+      Preview(currentTask, taskList);
+    });
   }
+
 
 }
 

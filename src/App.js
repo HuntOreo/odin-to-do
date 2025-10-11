@@ -12,19 +12,30 @@ const tasks = [
     content: 'My Task',
     date: {
       day: 12,
-      month: '02',
+      month: '2',
       year: 2025,
     },
   }),
   new Task({
+    title: 'Task 2!',
+    content: 'My other Task',
+    date: {
+      day: 12,
+      month: '2',
+      year: 2025,
+    },
+  }),
+  new Task({
+    title: 'IDK',
     content: 'My Task',
     date: {
       day: 2,
-      month: '02',
+      month: '2',
       year: 2025,
     },
   }),
   new Task({
+    title: 'Yippee',
     content: 'My Task',
     date: {
       day: 2,
@@ -40,13 +51,23 @@ const App = function () {
 
   app.append([
     Header(),
-    Sidebar_Hidden(),
+    Sidebar_Hidden(tasks),
     Sidebar_Showing(tasks),
-    Preview(tasks),
+    Preview(),
     Content(tasks),
   ]);
 
   return app;
 }
+
+App().addListener('click', (e) => {
+  const app = App().DOMElement;
+  console.log('clicked!');
+  if (
+    app.classList.contains('showingSidebar_withEditor') ||
+    app.classList.contains('hiddenSidebar_withEditor')
+  ) {
+  }
+})
 
 export default App;
