@@ -1,17 +1,17 @@
+import { Elem } from 'elekit';
 import Preview from '../../Components/Preview/Preview';
 
-function renderDayTasks(day, taskList) {
+function renderDayTasks(tasks, taskList) {
   const contentContainer = document.querySelector('.content');
   contentContainer.textContent = '';
 
-  const tasks = day.querySelectorAll('p');
-
   for (let task of tasks) {
-    const currentTask = taskList.filter(child => child.id == task.dataset.id)[0];
-    contentContainer.innerHTML += `
-      <div class='taskCard' data-id="${currentTask.id}">
-        <h2>${currentTask.title}</h2>
-        <p>${currentTask.content ? currentTask.content : 'Content...'}</p>
+    const taskCard = new Elem({
+      tag: 'div',
+      selectors: 'taskCard',
+      content: `
+        <h2>${task.title}</h2>
+        <p>${task.content ? task.content : 'Content...'}</p>
         <div class='container'>
           <div class='checkboxes'>
             <label>
@@ -28,17 +28,12 @@ function renderDayTasks(day, taskList) {
             <button class="deleteTaskBtn">Delete</button>
           </div>
         </div>
-      </div>
-    `
-
-    const thisTaskCard =
-      contentContainer.querySelector(`[data-id="${currentTask.id}"]`);
-    thisTaskCard.addEventListener('click', () => {
-      Preview(currentTask, taskList);
+      `
     });
+
+    taskCard.addListener('click', () => Preview(task, taskList));
+    contentContainer.append(taskCard.DOMElement);
   }
-
-
 }
 
 export default renderDayTasks;

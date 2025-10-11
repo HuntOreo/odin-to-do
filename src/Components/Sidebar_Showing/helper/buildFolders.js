@@ -4,7 +4,6 @@ import renderContentTasks from '../../../Helpers/events/renderContentTasks'
 import renderPreview from "../../../Helpers/events/renderPreview";
 import toggleTaskCreator from "../../../Helpers/events/toggleTaskCreator";
 
-
 const buildFolders = (taskList, container) => {
 	const months = {};
 
@@ -51,7 +50,9 @@ const buildFolders = (taskList, container) => {
 			dayFolder.append(dayHeader);
 
 			dayFolder.addListener('click', (e) => {
-
+				if (e.target.closest('.day')) {
+					renderContentTasks(days[day], taskList);
+				}
 			})
 
 			for (let task of days[day]) {
