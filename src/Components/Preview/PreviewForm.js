@@ -1,5 +1,5 @@
 import { Container, Elem, Head } from "elekit"
-
+import Content from '../Content/Content';
 
 const Form = (task, taskList) => {
 	const taskDateParam = task.date;
@@ -32,6 +32,8 @@ const Form = (task, taskList) => {
 		`
 	});
 
+	form.DOMElement.id = 'taskCreatorForm';
+
 	const titleInput = form.DOMElement.querySelector('#title');
 	const contentInput = form.DOMElement.querySelector('#content');
 	const priorityBox = form.DOMElement.querySelector('#priorityBox');
@@ -43,8 +45,26 @@ const Form = (task, taskList) => {
 		thisTask.textContent = e.target.value;
 
 		const taskIndex = taskList.findIndex(child => child === task);
-		taskList[taskIndex].title = ;
-		newTask.title = e.target.value;
+		taskList[taskIndex].title = e.target.value;
+	})
+
+	submitBtn.addEventListener('click', (e) => {
+		e.preventDefault();
+		const formElem = container.DOMElement.querySelector('#taskCreatorForm');
+		const formData = new FormData(formElem);
+
+		const formTitle = formData.get('title');
+		const formContent = formData.get('content');
+		const formColor = formData.get('color');
+		const formPriority = formData.get('priority');
+		
+		const taskIndex = taskList.findIndex(child => child === task);
+		taskList[taskIndex].title = formTitle;
+		taskList[taskIndex].content = formContent;
+		taskList[taskIndex].color = formColor;
+		taskList[taskIndex].priority =  formPriority ? true : false;
+
+		Content(taskList);
 	})
 
 	container.append([date, form]);
