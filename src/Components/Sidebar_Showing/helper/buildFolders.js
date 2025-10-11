@@ -56,14 +56,11 @@ const buildFolders = (taskList, container) => {
 			})
 
 			for (let task of days[day]) {
-				const taskFolder = new Elem({
+				const taskFolder = new Elem({ 
+					tag: 'div',
 					selectors: 'taskFolder', content: `
-						<div class="taskFolder">
-							<p>
-								${task.title}	
-								<button class="editTaskBtn">⚙️</button>
-							</p>
-						</div>
+					<span data-id="${task.id}">${task.title}</span>
+					<button class="editTaskBtn">⚙️</button>
 				`});
 
 				const btn = taskFolder.DOMElement.querySelector('.editTaskBtn');
