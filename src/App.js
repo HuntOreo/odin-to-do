@@ -11,8 +11,8 @@ const tasks = [
     title: 'Task!',
     content: 'My Task',
     date: {
-      day: 12,
-      month: '2',
+      day: undefined,
+      month: undefined,
       year: 2025,
     },
   }),

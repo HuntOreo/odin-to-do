@@ -1,19 +1,19 @@
 import { Container, Elem, Head } from "elekit"
-import renderContentTasks from '../../Helpers/events/renderContentTasks'
-import { buildFolders } from '../../Helpers/buildFolders';
 
 const Form = (task, taskList) => {
-	console.log(task)
+
+	console.log(task, task.date)
 	const taskDateParam = task.date;
 	const container = new Container('formContainer');
 	const date = new Head({
 		size: 1,
 		content:
-			taskDateParam.day === '' || 
-			taskDateParam.month === '' ? 
+			!taskDateParam.day|| 
+			!taskDateParam ? 
 			'No Date' :
 			`${taskDateParam.month}/${taskDateParam.day}` 
 	});
+
 	const form = new Elem({
 		tag: 'form',
 		content: `
@@ -39,6 +39,7 @@ const Form = (task, taskList) => {
 
 	form.DOMElement.id = 'taskCreatorForm';
 
+	// Form inputs
 	const titleInput = form.DOMElement.querySelector('#title');
 	const contentInput = form.DOMElement.querySelector('#content');
 	const priorityBox = form.DOMElement.querySelector('#priorityBox');
@@ -58,6 +59,7 @@ const Form = (task, taskList) => {
 		const formElem = container.DOMElement.querySelector('#taskCreatorForm');
 		const formData = new FormData(formElem);
 
+		// Grab form data
 		const formTitle = formData.get('title');
 		const formContent = formData.get('content');
 		const formColor = formData.get('color');
