@@ -1,8 +1,8 @@
 import { Container, Head, Elem } from "elekit";
 import { DateTime } from "luxon";
-import renderContentTasks from '../../../Helpers/events/renderContentTasks'
-import renderPreview from "../../../Helpers/events/renderPreview";
-import toggleTaskCreator from "../../../Helpers/events/toggleTaskCreator";
+import renderContentTasks from './events/renderContentTasks'
+import renderPreview from "./events/renderPreview";
+import toggleTaskCreator from "./events/toggleTaskCreator";
 
 const buildFolders = (taskList, container) => {
 	const months = {};
@@ -28,10 +28,16 @@ const buildFolders = (taskList, container) => {
 	}
 
 	for (let month in months) {
+		let monthFormatted;
 		const thisMonth = months[month];
-
+		
+		if(month) {
+			monthFormatted = DateTime.fromObject(thisMonth[0].date).toFormat('LLLL');
+		} else {
+			monthFormatted = 'Misc';
+		}
+		
 		const monthFolder = new Container({ selectors: ['folder', 'month'] });
-		const monthFormatted = DateTime.fromObject(thisMonth[0].date).toFormat('LLLL')
 		const monthHeader = new Head({ size: 2, content: monthFormatted });
 		monthFolder.append(monthHeader);
 
@@ -43,10 +49,17 @@ const buildFolders = (taskList, container) => {
 		}
 
 		for (let day in days) {
-			const thisDay = days[day];
+			let thisDay;
+
+			// if no date is provided, dont provide day header
+			if(!month) {
+				thisDay = '';
+			} else {
+				thisDay = days[day][0].date.day;
+			}
 
 			const dayFolder = new Container({ selectors: ['folder', 'day'] });
-			const dayHeader = new Head({ size: 3, content: thisDay[0].date.day });
+			const dayHeader = new Head({ size: 3, content: thisDay });
 			dayFolder.append(dayHeader);
 
 			dayFolder.addListener('click', (e) => {

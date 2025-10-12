@@ -1,14 +1,18 @@
 import { Container, Elem, Head } from "elekit"
 import renderContentTasks from '../../Helpers/events/renderContentTasks'
-import { buildFolders } from '../Sidebar_Showing/helper/buildFolders';
+import { buildFolders } from '../../Helpers/buildFolders';
 
 const Form = (task, taskList) => {
+	console.log(task)
 	const taskDateParam = task.date;
 	const container = new Container('formContainer');
 	const date = new Head({
 		size: 1,
 		content:
-			taskDateParam ? `${taskDateParam.month}/${taskDateParam.day}` : 'No Date'
+			taskDateParam.day === '' || 
+			taskDateParam.month === '' ? 
+			'No Date' :
+			`${taskDateParam.month}/${taskDateParam.day}` 
 	});
 	const form = new Elem({
 		tag: 'form',
