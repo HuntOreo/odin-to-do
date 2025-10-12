@@ -2,6 +2,8 @@ import { Elem } from 'elekit';
 import Preview from '../../Components/Preview/Preview';
 
 function renderDayTasks(tasks, taskList) {
+  console.log(tasks);
+  console.log(taskList);
   const contentContainer = document.querySelector('.content');
   contentContainer.textContent = '';
 
@@ -30,6 +32,8 @@ function renderDayTasks(tasks, taskList) {
         </div>
       `
     });
+
+    taskCard.DOMElement.dataset.id = task.id;
 
     taskCard.addListener('click', () => Preview(task, taskList));
     contentContainer.append(taskCard.DOMElement);
