@@ -73,7 +73,10 @@ const Form = (task, taskList) => {
 
 		const contentContainer = document.querySelector('.content');
 		const card = contentContainer.querySelector(`[data-id="${task.id}"]`);
-		updateTaskCard(task, card)
+		
+		if (card) {
+			updateTaskCard(task, card)
+		}
 	})
 
 	container.append([date, form]);
@@ -81,6 +84,7 @@ const Form = (task, taskList) => {
 }
 
 function updateTaskCard(data, card) {
+	console.log(card);
 	card.innerHTML = `
         <h2>${data.title}</h2>
         <p>${data.content ? data.content : 'Content...'}</p>
