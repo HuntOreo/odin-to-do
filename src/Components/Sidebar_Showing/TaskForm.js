@@ -1,6 +1,8 @@
 import { Elem, Input, Button, Container } from 'elekit';
 import { openDateInput, updateDate } from '../../Helpers/events/handleDateInput';
 import { addTask } from '../../Helpers/events/addTask';
+import Preview from '../Preview/Preview';
+import toggleTaskCreator from '../../Helpers/events/toggleTaskCreator';
 
 const TaskForm = (taskList) => {
   const container = new Container('form_container', { background: 'pink' })
@@ -26,11 +28,18 @@ const TaskForm = (taskList) => {
   const calendarBtn = new Button({ content: `
     <span class="material-symbols-outlined">date_range</span>
   ` });
-  const addTaskBtn = new Button('Add');
+  const addTaskBtn = new Button({
+    selectors: 'addTaskBtn', 
+    content: 'Add'
+  });
 
   dateInput.addListener('change', updateDate);
   calendarBtn.addListener('click', openDateInput);
-  addTaskBtn.addListener('click', () => addTask(taskList));
+  addTaskBtn.addListener('click', (e) => { 
+    const newTask = addTask(taskList);
+    Preview(newTask, taskList);
+    toggleTaskCreator(e);
+  });
 
   container.append([form, dateInput, calendarBtn, addTaskBtn]);
   return container;

@@ -10,6 +10,8 @@ const updateTasks = (task, taskList) => {
 
 	taskList.push(newTask);
 	Tasks(taskList);
+
+	return newTask;
 }
 
 export {

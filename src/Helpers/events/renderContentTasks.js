@@ -31,6 +31,8 @@ function renderDayTasks(tasks, taskList) {
       `
     });
 
+    taskCard.DOMElement.dataset.id = task.id;
+
     taskCard.addListener('click', () => Preview(task, taskList));
     contentContainer.append(taskCard.DOMElement);
   }
