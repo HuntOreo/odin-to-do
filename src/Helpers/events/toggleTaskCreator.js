@@ -18,9 +18,12 @@ const toggleTaskCreator = (e) => {
 
 		// If clicked outside bounds of task creator, close.
 		//	UNLESS it is the editTaskBtn, taskCard
-		if (!e.target.closest('.taskCreator') &&
+		if (
+			!e.target.closest('.taskCreator') &&
 			!e.target.classList.contains('editTaskBtn') &&
-			!e.target.closest('.taskCard')) {
+			!e.target.closest('.taskCard') && 
+			!e.target.classList.contains('addTaskBtn')
+		) {
 
 			// if task creator is open, 
 			// check if an element is clicked outside of the container

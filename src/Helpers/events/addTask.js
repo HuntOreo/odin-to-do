@@ -12,7 +12,7 @@ const addTask = (taskList) => {
         }
     });
 
-    updateTasks(task, taskList);
+    return updateTasks(task, taskList);
 }
 
 export {

@@ -2,7 +2,7 @@ import { Container, Elem, Head } from "elekit"
 
 const Form = (task, taskList) => {
 
-	console.log(task, task.date)
+	console.log(task);
 	const taskDateParam = task.date;
 	const container = new Container('formContainer');
 	const date = new Head({
