@@ -1,20 +1,28 @@
 import { DateTime } from 'luxon';
 import Sidebar_Showing from '../../Components/Sidebar_Showing/Sidebar_Showing';
-import updateCard from './updateCard';
+import Content from '../../Components/Content/Content';
+
 
 const changeTaskDate = (event, task, taskList) => {
   const date = event.target.value;
   const luxonDate = DateTime.fromISO(date);
 
   const taskIndex = taskList.findIndex(child => child.id === task.id);
-  taskList[taskIndex].date = {
+  const updatedTask = taskList[taskIndex];
+  updatedTask.date = {
     day: luxonDate.day,
     month: luxonDate.month,
     year: luxonDate.year,
   }
 
+  // update sidebar tree
   Sidebar_Showing(taskList);
-  updateCard(task)
+
+  // update content with matching days
+  const matchingTasks = taskList.filter(child => {
+    return child.date.month == updatedTask.date.month
+  });
+  Content(matchingTasks);
 }
 
 export {
