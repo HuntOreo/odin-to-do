@@ -1,7 +1,7 @@
 import { Elem } from 'elekit';
 import Preview from '../../Components/Preview/Preview';
 
-function renderDayTasks(tasks, taskList) {
+function renderContentTasks(tasks, taskList) {
   const contentContainer = document.querySelector('.content');
   contentContainer.textContent = '';
 
@@ -38,4 +38,4 @@ function renderDayTasks(tasks, taskList) {
   }
 }
 
-export default renderDayTasks;
+export default renderContentTasks;
