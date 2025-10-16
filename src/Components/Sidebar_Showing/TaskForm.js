@@ -25,17 +25,18 @@ const TaskForm = (taskList) => {
     border: 'none',
   });
   // Clickable icon to display the date picker input
-  const calendarBtn = new Button({ content: `
+  const calendarBtn = new Button({
+    content: `
     <span class="material-symbols-outlined">date_range</span>
   ` });
   const addTaskBtn = new Button({
-    selectors: 'addTaskBtn', 
+    selectors: 'addTaskBtn',
     content: 'Add'
   });
 
   dateInput.addListener('change', updateDate);
-  calendarBtn.addListener('click', openDateInput);
-  addTaskBtn.addListener('click', (e) => { 
+  calendarBtn.addListener('click', () => openDateInput(container.DOMElement));
+  addTaskBtn.addListener('click', (e) => {
     const newTask = addTask(taskList);
     Preview(newTask, taskList);
     toggleTaskCreator(e);

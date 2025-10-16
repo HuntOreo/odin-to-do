@@ -1,5 +1,4 @@
 import Preview from "../../Components/Preview/Preview";
-import toggleTaskCreator from "./toggleTaskCreator";
 
 const renderPreview = (id, taskList) => {
   let task;

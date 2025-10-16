@@ -1,14 +1,14 @@
 import { DateTime } from "luxon";
 
-const openDateInput = () => {
-	const dateInput = document.querySelector('.hiddenDateInput');
+const openDateInput = (container) => {
+	const dateInput = container.querySelector('.hiddenDateInput');
 	dateInput.showPicker();
 }
 
 const updateDate = (event) => {
 	const value = event.target.value;
 	const date = DateTime.fromSQL(value);
-	
+
 	const monthInput = document.querySelector('#sidebarMonth');
 	const dayInput = document.querySelector('#sidebarDay');
 
@@ -21,4 +21,3 @@ export {
 	updateDate
 }
 
-	

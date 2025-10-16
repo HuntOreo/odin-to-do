@@ -1,18 +1,9 @@
-import { Container, Elem, Head } from "elekit"
+import { Container, Elem } from "elekit";
+import PreviewHeader from './PreviewHeader';
+import updateCard from '../../Helpers/events/updateCard';
 
 const Form = (task, taskList) => {
-
-	console.log(task);
-	const taskDateParam = task.date;
 	const container = new Container('formContainer');
-	const date = new Head({
-		size: 1,
-		content:
-			!taskDateParam.day|| 
-			!taskDateParam ? 
-			'No Date' :
-			`${taskDateParam.month}/${taskDateParam.day}` 
-	});
 
 	const form = new Elem({
 		tag: 'form',
@@ -71,40 +62,15 @@ const Form = (task, taskList) => {
 		taskList[taskIndex].color = formColor;
 		taskList[taskIndex].priority = formPriority ? true : false;
 
-		const contentContainer = document.querySelector('.content');
-		const card = contentContainer.querySelector(`[data-id="${task.id}"]`);
-		
 		if (card) {
-			updateTaskCard(task, card)
+			updateCard(task)
 		}
-	})
+	});
 
-	container.append([date, form]);
+	container.append([PreviewHeader(task, taskList), form]);
 	return container;
 }
 
-function updateTaskCard(data, card) {
-	console.log(card);
-	card.innerHTML = `
-        <h2>${data.title}</h2>
-        <p>${data.content ? data.content : 'Content...'}</p>
-        <div class='container'>
-          <div class='checkboxes'>
-            <label>
-              Priority
-              <input class="priorityCheck" type='checkbox'>
-            </label>
-            <label>
-              Color
-              <input class="colorAssign" type='color'>
-            </label>
-          </div>
-          <div class="btns">
-            <button class="editTaskBtn">Edit</button>
-            <button class="deleteTaskBtn">Delete</button>
-          </div>
-        </div>
-      `
-}
+
 
 export default Form;
