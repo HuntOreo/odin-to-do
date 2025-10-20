@@ -21,7 +21,6 @@ const toggleTaskCreator = (e) => {
 		if (
 			!e.target.closest('.taskCreator') &&
 			!e.target.classList.contains('editTaskBtn') &&
-			!e.target.closest('.taskCard') && 
 			!e.target.classList.contains('addTaskBtn')
 		) {
 

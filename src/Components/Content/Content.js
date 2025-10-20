@@ -1,12 +1,19 @@
 import { Container, Elem } from 'elekit';
+import Preview from '../Preview/Preview';
+import deleteTask from '../../Helpers/events/deleteTask';
+import toggleTaskCreator from '../../Helpers/events/toggleTaskCreator';
 
-const Content = (tasks) => {
+const Content = (taskList, days) => {
   let container = document.querySelector('.content');
+
+  // if Content element doesnt exist, build it.
   if (!container) {
     container = new Container('content', { background: 'hotpink' });
-  } else {
+  } else if (container) {
+
+    // wipe content for re-rendering
     container.textContent = '';
-    for (let task of tasks) {
+    for (let task of days) {
       const taskCard = new Elem({
         tag: 'div',
         selectors: 'taskCard',
@@ -34,7 +41,16 @@ const Content = (tasks) => {
 
       taskCard.DOMElement.dataset.id = task.id;
 
-      taskCard.addListener('click', () => Preview(task, taskList));
+      const editTaskBtn = taskCard.DOMElement.querySelector('.editTaskBtn');
+      const deleteTaskBtn = taskCard.DOMElement.querySelector('.deleteTaskBtn');
+      editTaskBtn.addEventListener('click', (e) => {
+        Preview(task, taskList);
+        toggleTaskCreator(e);
+      });
+      deleteTaskBtn.addEventListener('click', (e) => {
+        deleteTask(task.id, taskList, days);
+        toggleTaskCreator(e);
+      });
       container.append(taskCard.DOMElement);
     }
   }

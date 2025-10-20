@@ -4,6 +4,7 @@ import Content from '../Components/Content/Content';
 import renderPreview from "./events/renderPreview";
 import toggleTaskCreator from "./events/toggleTaskCreator";
 import { getMonths, getDays } from './folderFilter';
+import deleteTask from './events/deleteTask';
 
 const buildFolders = (taskList, container) => {
 	const months = getMonths(taskList);
@@ -46,8 +47,11 @@ const createDayFolders = (monthFolder, month, taskList) => {
 		dayFolder.append(dayHeader);
 
 		dayFolder.addListener('click', (e) => {
-			if (e.target.closest('.day')) {
-				Content(days[day]);
+			if (
+				e.target.closest('.day') &&
+				!e.target.classList.contains('deleteTaskBtn')
+			) {
+				Content(taskList, days[day]);
 			}
 		})
 
@@ -58,13 +62,18 @@ const createDayFolders = (monthFolder, month, taskList) => {
 				selectors: 'taskFolder', content: `
 				<span data-id="${task.id}">${task.title}</span>
 				<button class="editTaskBtn">⚙️</button>
+				<button class="deleteTaskBtn">🗑️</button>
 			`});
 
 			// grab that tasks edit btn and assign listener
-			const btn = taskFolder.DOMElement.querySelector('.editTaskBtn');
-			btn.addEventListener('click', (e) => {
+			const editTaskBtn = taskFolder.DOMElement.querySelector('.editTaskBtn');
+			editTaskBtn.addEventListener('click', (e) => {
 				toggleTaskCreator(e);
 				renderPreview(task.id, taskList);
+			})
+			const deleteTaskBtn = taskFolder.DOMElement.querySelector('.deleteTaskBtn');
+			deleteTaskBtn.addEventListener('click', (e) => {
+				deleteTask(task.id, taskList, days[day]);
 			})
 			dayFolder.append(taskFolder);
 		}
