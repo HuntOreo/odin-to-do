@@ -53,7 +53,7 @@ const App = function () {
     Sidebar_Hidden(tasks),
     Sidebar_Showing(tasks),
     Preview(),
-    Content(tasks),
+    Content(),
   ]);
 
   return app;

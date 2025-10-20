@@ -51,7 +51,7 @@ const createDayFolders = (monthFolder, month, taskList) => {
 				e.target.closest('.day') &&
 				!e.target.classList.contains('deleteTaskBtn')
 			) {
-				Content(days[day]);
+				Content(taskList, days[day]);
 			}
 		})
 

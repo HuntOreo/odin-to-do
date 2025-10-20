@@ -9,7 +9,7 @@ const deleteTask = (taskID, taskList, days) => {
   days.splice(daysIndex, 1);
 
   Sidebar_Showing(taskList);
-  Content(days);
+  Content(taskList, days);
 }
 
 export default deleteTask;
