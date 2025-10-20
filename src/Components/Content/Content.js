@@ -1,12 +1,15 @@
 import { Container, Elem } from 'elekit';
+import Preview from '../Preview/Preview';
 
-const Content = (tasks) => {
+const Content = (taskList) => {
   let container = document.querySelector('.content');
   if (!container) {
     container = new Container('content', { background: 'hotpink' });
-  } else {
+  } else if (container) {
     container.textContent = '';
-    for (let task of tasks) {
+    console.log(taskList)
+    for (let task of taskList) {
+      console.log(taskList)
       const taskCard = new Elem({
         tag: 'div',
         selectors: 'taskCard',
