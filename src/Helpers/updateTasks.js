@@ -9,6 +9,7 @@ const updateTasks = (task, taskList) => {
 	}
 
 	taskList.push(newTask);
+	document.cookie = `userTasks=${JSON.stringify(taskList)}`;
 	Tasks(taskList);
 
 	return newTask;
