@@ -72,7 +72,6 @@ const App = function () {
     Content(),
   ]);
 
-  console.log(taskList)
   app.append([
     Header(),
     Sidebar_Hidden(taskList),
