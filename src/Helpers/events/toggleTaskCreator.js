@@ -1,6 +1,6 @@
 const toggleTaskCreator = (e) => {
 	const app = document.querySelector('.app');
-	const taskCreator = app.querySelector('.taskCreator');
+	const taskCreator = app.querySelector('.task_creator');
 
 	// If taskCreator is hidden (.hideElem), then show it.
 	if (taskCreator.classList.contains('hideElem')) {
@@ -19,7 +19,7 @@ const toggleTaskCreator = (e) => {
 		// If clicked outside bounds of task creator, close.
 		//	UNLESS it is the editTaskBtn, taskCard
 		if (
-			!e.target.closest('.taskCreator') &&
+			!e.target.closest('.task_creator') &&
 			!e.target.classList.contains('editTaskBtn') &&
 			!e.target.classList.contains('addTaskBtn')
 		) {

@@ -1,12 +1,27 @@
 @import '../node_modules/@huntoreocodes/hunter-normalize/hunter-normalize.css';
 
+@import '/src/styles/sidebar.css';
+@import '/src/styles/header.css';
+@import '/src/styles/content.css';
+
+:root {
+  --background-primary: #556177;
+  --background-secondary: #FFF;
+  --background-gray: #E3E3E3;
+  --button-blue: #37BFF9;
+  --button-gray: #ADADAD;
+  --delete-red: #F54646;
+  --path-orange: #F4A04C;
+}
+
 body, html {
   height: 100%;
 }
 
 .taskCard {
   margin: 10px;
-  max-width: 200px;
+  width: clamp(200px, 20vw, 300px);
+  height: clamp(200px, 20vh, 300px);
 
   background: lightblue;
 }
@@ -16,38 +31,16 @@ body, html {
   display: grid;
 }
 
-/* default */
+/* 
+  Grid Layout 
+  =============
+*/
 .app {
   grid-template-areas: 
-  "header header header header"
-  "sidebar_showing content content content";
+  "header header header"
+  "sidebar_hidden main main";
   grid-template-rows: 100px auto;
-  grid-template-columns: minmax(100px, 300px) auto;
-}
-
-/* Sidebar hidden */
-.hiddenSidebar_noEditor {
-  grid-template-areas:
-    "header header header header"
-    "sidebar_hidden content content content"
-  ;
-  grid-template-columns: 50px auto;
-}
-/* sidebar + taskcreator */
-.showingSidebar_withEditor {
-  grid-template-areas: 
-    "header header header header"
-    "sidebar_showing taskCreator content content"
-  ;
-  grid-template-columns: 150px 200px auto;
-}
-/* hiddenSidebar + taskCreator */ 
-.hiddenSidebar_withEditor {
-  grid-template-areas: 
-    "header header header header"
-    "sidebar_hidden taskCreator content content"
-  ;
-  grid-template-columns: 50px 200px auto;
+  grid-template-columns: 40px auto;
 }
 
 header { 
@@ -59,16 +52,36 @@ header {
   grid-area: sidebar_hidden;
 }
 
-.sidebar_showing {
-  grid-area: sidebar_showing;
+main {
+  grid-area: main;
 }
 
-.taskCreator {
-  grid-area: taskCreator;
+/* 
+  Main Layout
+  ============
+*/
+main {
+  display: flex;
+  flex-direction: row;
 }
 
-.content {
-  grid-area: content;
+main .content {
+  flex: 1;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+}
+
+main .content .wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 5px;
+  max-height: calc(100vh - 100px);
+}
+
+main .sidebar_showing,
+main .task_creator {
+  min-width: clamp(150px, 30vw, 250px);
 }
 
 /* Hide elements */

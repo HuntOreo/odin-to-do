@@ -2,13 +2,13 @@ import { Container } from "elekit"
 import Form from "./PreviewForm";
 
 const Preview = (task, taskList) => {
-	let container = document.querySelector('.taskCreator');
+	let container = document.querySelector('.task_creator');
 	if (container) {
 		container.textContent = '';
 		container.append(Form(task, taskList).DOMElement);
 	} else {
 		container = new Container(
-			{ selectors: ['taskCreator', 'hideElem'] },
+			{ selectors: ['task_creator', 'hideElem'] },
 			{ background: 'orange' }
 		);
 		if (task) {

@@ -1,8 +1,9 @@
 import { Button, Container } from 'elekit';
 import renderPreview from '../../Helpers/events/renderPreview';
+import toggleSidebar from '../../Helpers/events/toggleSidebar';
 
 const Sidebar_Hidden = (taskList) => {
-  const container = new Container({selectors: ['sidebar_hidden', 'hideElem']}, { background: 'skyblue' });
+  const container = new Container({ selectors: ['sidebar_hidden'] });
   const openPreview = new Button({
     content: '+',
     selectors: 'open_preview',
@@ -12,11 +13,15 @@ const Sidebar_Hidden = (taskList) => {
     selectors: 'open_sidebar'
   });
 
+  openSidebar.addListener('click', (e) => {
+    toggleSidebar();
+  })
+
   openPreview.addListener('click', (e) => {
     renderPreview(undefined, taskList)
     toggleTaskCreator(e);
   })
-  container.append([openPreview, openSidebar]);
+  container.append([openSidebar, openPreview]);
   return container;
 }
 

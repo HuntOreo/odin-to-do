@@ -6,11 +6,9 @@ const Header = function () {
     tag: 'header'
   }, { background: 'lightgreen' });
 
-  const toggleSideBtn = new Button('Toggle Sidebar');
-  toggleSideBtn.addListener('click', toggleSidebar);
   const logo = new Head('LOGO');
 
-  header.append([toggleSideBtn, logo]);
+  header.append(logo);
   return header;
 }
 

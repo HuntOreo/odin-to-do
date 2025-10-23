@@ -9,7 +9,9 @@ const Sidebar_Showing = (taskList) => {
     sidebar.append(TaskForm(taskList).DOMElement);
     sidebar.append(Tasks(taskList).DOMElement);
   } else {
-    const container = new Container('sidebar_showing', { background: 'violet' });
+    const container = new Container({
+      selectors: ['sidebar_showing', 'hideElem']
+    }, { background: 'violet' });
     container.append([TaskForm(taskList), Tasks(taskList)]);
     return container;
   }

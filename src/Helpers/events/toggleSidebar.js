@@ -1,19 +1,18 @@
 const toggleSidebar = () => {
-  const app = document.querySelector('.app');
-  const hiddenSide = document.querySelector('.sidebar_hidden');
-  const showingSide = document.querySelector('.sidebar_showing');
+  const sidebar = document.querySelector('.sidebar_showing');
+  const previewBtn = document.querySelector('.open_preview');
+  const sidebarBtn = document.querySelector('.open_sidebar');
 
-  showingSide.classList.toggle('hideElem');
-  hiddenSide.classList.toggle('hideElem');
-  
-  if (
-    app.classList.contains('showingSidebar_withEditor') ||
-    app.classList.contains('hiddenSidebar_withEditor')) {
-      app.classList.toggle('showingSidebar_withEditor');
-      app.classList.toggle('hiddenSidebar_withEditor');
+  sidebar.classList.toggle('hideElem');
+
+  if (!sidebar.classList.contains('hideElem')) {
+    previewBtn.classList.toggle('hideElem');
+    sidebarBtn.textContent = '<';
   } else {
-    app.classList.toggle('hiddenSidebar_noEditor');
+    previewBtn.classList.toggle('hideElem');
+    sidebarBtn.textContent = '>';
   }
+
 }
 
 export default toggleSidebar;

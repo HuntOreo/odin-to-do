@@ -8,6 +8,8 @@ const deleteTask = (taskID, taskList, days) => {
   taskList.splice(taskListIndex, 1);
   days.splice(daysIndex, 1);
 
+  document.cookie = `userTasks=${JSON.stringify(taskList)}`;
+
   Sidebar_Showing(taskList);
   Content(taskList, days);
 }
