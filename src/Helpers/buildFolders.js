@@ -68,7 +68,6 @@ const createDayFolders = (monthFolder, month, taskList) => {
 			// grab that tasks edit btn and assign listener
 			const editTaskBtn = taskFolder.DOMElement.querySelector('.editTaskBtn');
 			editTaskBtn.addEventListener('click', (e) => {
-				toggleTaskCreator(e);
 				renderPreview(task.id, taskList);
 			})
 			const deleteTaskBtn = taskFolder.DOMElement.querySelector('.deleteTaskBtn');

@@ -45,11 +45,9 @@ const Content = (taskList, days) => {
       const deleteTaskBtn = taskCard.DOMElement.querySelector('.deleteTaskBtn');
       editTaskBtn.addEventListener('click', (e) => {
         Preview(task, taskList);
-        toggleTaskCreator(e);
       });
       deleteTaskBtn.addEventListener('click', (e) => {
         deleteTask(task.id, taskList, days);
-        toggleTaskCreator(e);
       });
       tasksWrapper.append(taskCard)
     }

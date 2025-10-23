@@ -39,7 +39,6 @@ const TaskForm = (taskList) => {
   addTaskBtn.addListener('click', (e) => {
     const newTask = addTask(taskList);
     Preview(newTask, taskList);
-    toggleTaskCreator(e);
   });
 
   container.append([form, dateInput, calendarBtn, addTaskBtn]);

@@ -1,43 +1,33 @@
-const toggleTaskCreator = (e) => {
+const toggleTaskCreator = (e, taskList) => {
+	const target = e.target;
 	const app = document.querySelector('.app');
 	const taskCreator = app.querySelector('.task_creator');
 
-	// If taskCreator is hidden (.hideElem), then show it.
-	if (taskCreator.classList.contains('hideElem')) {
-		taskCreator.classList.toggle('hideElem');
+	let isHidden;
+	taskCreator.classList.contains('hideElem') ? isHidden = true : isHidden = false;
+	
+	if (isHidden) {
 		if (
-			app.classList.contains('hiddenSidebar_withEditor') ||
-			app.classList.contains('hiddenSidebar_noEditor')
+			target.classList.contains('open_preview') ||
+			target.classList.contains('editTaskBtn')
 		) {
-			app.classList.toggle('hiddenSidebar_withEditor');
-			app.classList.toggle('hiddenSidebar_noEditor');
+			taskCreator.classList.toggle('hideElem');
+		}
+	} else {
+		if (target.classList.contains('editTaskBtn')) {
+			const card = target.closest('.taskCard');
+			const targetedID = card.dataset.id;
+			const targetedTask = taskList.filter(child => child.id = targetedID);
+			console.log(targetedTask);
 		}
 
-		app.classList.toggle('showingSidebar_withEditor');
-	} else {
-
-		// If clicked outside bounds of task creator, close.
-		//	UNLESS it is the editTaskBtn, taskCard
-		if (
-			!e.target.closest('.task_creator') &&
-			!e.target.classList.contains('editTaskBtn') &&
-			!e.target.classList.contains('addTaskBtn')
+		if(
+			!target.closest('.task_creator') &&
+			!target.classList.contains('open_sidebar') &&
+			!target.closest('.taskFolder') && 
+			!target.classList.contains('editTaskBtn')
 		) {
-
-			// if task creator is open, 
-			// check if an element is clicked outside of the container
-			// and close the task creator if true
-			if (app.classList.contains('hiddenSidebar_withEditor')) {
-				app.classList.toggle('hiddenSidebar_withEditor');
-				app.classList.toggle('hiddenSidebar_noEditor');
-				taskCreator.classList.toggle('hideElem');
-
-			} else if (app.classList.contains('showingSidebar_withEditor')) {
-				app.classList.toggle('showingSidebar_withEditor');
-				app.classList.toggle('showingSidebar_noEditor');
-				taskCreator.classList.toggle('hideElem');
-
-			}
+			taskCreator.classList.add('hideElem');
 		}
 	}
 }
