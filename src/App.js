@@ -1,4 +1,5 @@
 import { Container, Elem } from 'elekit';
+import Task from '../src/Task_Class'
 import Header from './Components/Header/Header';
 import Sidebar_Hidden from './Components/Sidebar_Hidden/Sidebar_Hidden';
 import Sidebar_Showing from './Components/Sidebar_Showing/Sidebar_Showing';
