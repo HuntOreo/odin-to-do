@@ -1,0 +1,28 @@
+/* 
+  Sidebar - Hidden
+  =================
+*/
+
+.sidebar_hidden {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+
+  background-color: var(--background-gray);
+  box-shadow: 0px 5px 5px gray;
+  z-index: 2;
+}
+
+.sidebar_hidden button {
+  flex: 1;
+  gap: 5px;
+  margin: 5px;
+}
+
+.sidebar_hidden .open_preview {
+  background-color: var(--button-blue);
+}
+
+.sidebar_hidden .open_sidebar {
+  background-color: var(--button-gray);
+}

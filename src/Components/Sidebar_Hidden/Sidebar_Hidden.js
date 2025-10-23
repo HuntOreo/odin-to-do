@@ -2,7 +2,7 @@ import { Button, Container } from 'elekit';
 import renderPreview from '../../Helpers/events/renderPreview';
 
 const Sidebar_Hidden = (taskList) => {
-  const container = new Container({selectors: ['sidebar_hidden', 'hideElem']}, { background: 'skyblue' });
+  const container = new Container({ selectors: ['sidebar_hidden', 'hideElem'] });
   const openPreview = new Button({
     content: '+',
     selectors: 'open_preview',
