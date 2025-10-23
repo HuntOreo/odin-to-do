@@ -10,7 +10,7 @@ const Content = (taskList, days) => {
   if (!container) {
     container = new Container('content', { background: 'hotpink' });
   } else if (container) {
-
+    const tasksWrapper = new Container('wrapper');
     // wipe content for re-rendering
     container.textContent = '';
     for (let task of days) {
@@ -51,8 +51,9 @@ const Content = (taskList, days) => {
         deleteTask(task.id, taskList, days);
         toggleTaskCreator(e);
       });
-      container.append(taskCard.DOMElement);
+      tasksWrapper.append(taskCard)
     }
+    container.append(tasksWrapper.DOMElement);
   }
 
   return container;

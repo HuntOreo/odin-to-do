@@ -1,4 +1,4 @@
-import { Container } from 'elekit';
+import { Container, Elem } from 'elekit';
 import Header from './Components/Header/Header';
 import Sidebar_Hidden from './Components/Sidebar_Hidden/Sidebar_Hidden';
 import Sidebar_Showing from './Components/Sidebar_Showing/Sidebar_Showing';
@@ -64,13 +64,19 @@ if (!userTasksExist) {
 const App = function () {
 
   const app = new Container({ selectors: 'app' });
+  const main = new Elem({ tag: 'main' });
+
+  main.append([
+    Sidebar_Showing(taskList),
+    Preview(),
+    Content(),
+  ]);
+
   console.log(taskList)
   app.append([
     Header(),
     Sidebar_Hidden(taskList),
-    Sidebar_Showing(taskList),
-    Preview(),
-    Content(),
+    main
   ]);
 
   return app;
