@@ -2,7 +2,6 @@ import { Container, Head, Elem } from "elekit";
 import { DateTime } from "luxon";
 import Content from '../Components/Content/Content';
 import renderPreview from "./events/renderPreview";
-import toggleTaskCreator from "./events/toggleTaskCreator";
 import { getMonths, getDays } from './folderFilter';
 import deleteTask from './events/deleteTask';
 

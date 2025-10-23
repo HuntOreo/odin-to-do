@@ -12,7 +12,6 @@ const toggleSidebar = () => {
     previewBtn.classList.toggle('hideElem');
     sidebarBtn.textContent = '>';
   }
-
 }
 
 export default toggleSidebar;

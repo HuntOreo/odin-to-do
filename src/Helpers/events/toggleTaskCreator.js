@@ -14,7 +14,10 @@ const toggleTaskCreator = (e, taskList) => {
 			taskCreator.classList.toggle('hideElem');
 		}
 	} else {
-		if (target.classList.contains('editTaskBtn')) {
+		if (
+			target.classList.contains('editTaskBtn') &&
+			target.closest('.taskCard')
+		) {
 			const card = target.closest('.taskCard');
 			const targetedID = card.dataset.id;
 			const targetedTask = taskList.filter(child => child.id = targetedID);
