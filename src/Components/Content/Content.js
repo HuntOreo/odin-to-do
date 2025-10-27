@@ -54,8 +54,9 @@ const Content = (taskList, days) => {
         deleteTask(task.id, taskList, days);
       });
       assignColorInput.addEventListener('input', (e) => {
-        console.log('e.target');
-        updateColor()
+        console.log(e.target.value);
+        const color = e.target.value;
+        updateColor(color, taskCard, task, taskList);
       });
 
       tasksWrapper.append(taskCard)
