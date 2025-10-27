@@ -61,8 +61,6 @@ const handleCookies = (taskList) => {
 
 const updateCookie = (cookieName, data) => {
   document.cookie = `${cookieName}=${JSON.stringify(data)}`
-  console.log(document.cookie)
-
 }
 
 export {
