@@ -59,4 +59,13 @@ const handleCookies = (taskList) => {
   return newTaskList;
 }
 
-export default handleCookies;
+const updateCookie = (cookieName, data) => {
+  document.cookie = `${cookieName}=${JSON.stringify(data)}`
+  console.log(document.cookie)
+
+}
+
+export {
+  handleCookies,
+  updateCookie
+};

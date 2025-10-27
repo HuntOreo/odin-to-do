@@ -4,7 +4,7 @@ import Sidebar_Hidden from './Components/Sidebar_Hidden/Sidebar_Hidden';
 import Sidebar_Showing from './Components/Sidebar_Showing/Sidebar_Showing';
 import Preview from './Components/Preview/Preview';
 import Content from './Components/Content/Content';
-import handleCookies from './Helpers/handleCookies';
+import { handleCookies } from './Helpers/handleCookies';
 
 const App = function (taskList) {
 
