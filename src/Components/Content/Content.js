@@ -40,7 +40,15 @@ const Content = (taskList, days) => {
         `
       });
 
+      // Assign pair task with card by ID.
       taskCard.DOMElement.dataset.id = task.id;
+
+      // Apply color code if one exists.
+      if (task.color) {
+        taskCard.applyTemplate({
+          border: `2px solid ${task.color}`
+        });
+      }
 
       // Assign Event Listeners
       const editTaskBtn = taskCard.DOMElement.querySelector('.editTaskBtn');
