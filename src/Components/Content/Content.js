@@ -2,6 +2,7 @@ import { Container, Elem } from 'elekit';
 import Preview from '../Preview/Preview';
 import deleteTask from '../../Helpers/events/deleteTask';
 import toggleTaskCreator from '../../Helpers/events/toggleTaskCreator';
+import updateColor from '../../Helpers/events/updateColor';
 
 const Content = (taskList, days) => {
   let container = document.querySelector('.content');
@@ -28,7 +29,7 @@ const Content = (taskList, days) => {
               </label>
               <label>
                 Color
-                <input class="colorAssign" type='color'>
+                <input class="assignColor" type='color'>
               </label>
             </div>
             <div class="btns">
@@ -41,14 +42,22 @@ const Content = (taskList, days) => {
 
       taskCard.DOMElement.dataset.id = task.id;
 
+      // Assign Event Listeners
       const editTaskBtn = taskCard.DOMElement.querySelector('.editTaskBtn');
       const deleteTaskBtn = taskCard.DOMElement.querySelector('.deleteTaskBtn');
+      const assignColorInput = taskCard.DOMElement.querySelector('.assignColor');
+
       editTaskBtn.addEventListener('click', (e) => {
         Preview(task, taskList);
       });
       deleteTaskBtn.addEventListener('click', (e) => {
         deleteTask(task.id, taskList, days);
       });
+      assignColorInput.addEventListener('input', (e) => {
+        console.log('e.target');
+        updateColor()
+      });
+
       tasksWrapper.append(taskCard)
     }
     container.append(tasksWrapper.DOMElement);
