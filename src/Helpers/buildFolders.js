@@ -4,6 +4,7 @@ import Content from '../Components/Content/Content';
 import renderPreview from "./events/renderPreview";
 import { getMonths, getDays } from './folderFilter';
 import deleteTask from './events/deleteTask';
+import completeTask from './events/completeTask';
 
 const buildFolders = (taskList, container) => {
 	const months = getMonths(taskList);
@@ -62,6 +63,7 @@ const createDayFolders = (monthFolder, month, taskList) => {
 				<span data-id="${task.id}">${task.title}</span>
 				<button class="editTaskBtn">⚙️</button>
 				<button class="deleteTaskBtn">🗑️</button>
+				<button class="completeBtn">✅</button>
 			`});
 
 			// grab that tasks edit btn and assign listener
@@ -72,6 +74,10 @@ const createDayFolders = (monthFolder, month, taskList) => {
 			const deleteTaskBtn = taskFolder.DOMElement.querySelector('.deleteTaskBtn');
 			deleteTaskBtn.addEventListener('click', (e) => {
 				deleteTask(task.id, taskList, days[day]);
+			})
+			const completeBtn = taskFolder.DOMElement.querySelector('.completeBtn');
+			completeBtn.addEventListener('click', (e) => {
+				completeTask(task, taskList);
 			})
 			dayFolder.append(taskFolder);
 		}
