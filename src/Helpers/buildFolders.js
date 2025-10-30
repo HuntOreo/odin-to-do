@@ -79,7 +79,7 @@ const createDayFolders = (monthFolder, month, taskList, monthName) => {
 			})
 			const completeBtn = taskFolder.DOMElement.querySelector('.completeBtn');
 			completeBtn.addEventListener('click', (e) => {
-				completeTask(task, taskList);
+				completeTask(task, taskList, days[day]);
 			})
 			dayFolder.append(taskFolder);
 		}
