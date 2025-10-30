@@ -41,15 +41,21 @@ const getMonths = (taskList) => {
   return months;
 }
 
-const getDays = (month) => {
+const getDays = (month, monthName) => {
+
   // grab days from month
   const days = {}
-  for (let task of month) {
-    days[task.date.day] = month.filter(child => {
-      return child.date.day == task.date.day;
-    })
+  if(monthName === 'complete') {
+    return month;
+  } else {
+    for (let task of month) {
+      days[task.date.day] = month.filter(child => {
+        return child.date.day == task.date.day;
+      })
+    }
+
+    return days;
   }
-  return days;
 }
 
 export {
