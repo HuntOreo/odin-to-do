@@ -10,7 +10,6 @@ const buildFolders = (taskList, container) => {
 	const months = getMonths(taskList);
 
 	for (let month in months) {
-		console.log(months)
 		let monthFormatted;
 		const thisMonth = months[month];
 
@@ -27,18 +26,18 @@ const buildFolders = (taskList, container) => {
 		monthFolder.append(monthHeader);
 
 
-		createDayFolders(monthFolder, thisMonth, taskList);
+		createDayFolders(monthFolder, thisMonth, taskList, month);
 		container.append(monthFolder.DOMElement);
 	}
 }
 
-const createDayFolders = (monthFolder, month, taskList) => {
+const createDayFolders = (monthFolder, month, taskList, monthName) => {
 	const days = getDays(month);
 
 	for (let day in days) {
 		let thisDay;
 		// if no date is provided, leave header blank.
-		if (!month) {
+		if (monthName == 'complete' || monthName == 'misc') {
 			thisDay = '';
 		} else {
 			thisDay = days[day][0].date.day;
