@@ -10,13 +10,16 @@ const buildFolders = (taskList, container) => {
 	const months = getMonths(taskList);
 
 	for (let month in months) {
+		console.log(months)
 		let monthFormatted;
 		const thisMonth = months[month];
 
-		if (month != 'misc') {
-			monthFormatted = DateTime.fromObject(thisMonth[0].date).toFormat('LLLL');
-		} else {
+		if (month === 'misc') {
 			monthFormatted = 'Misc';
+		} else if (month === 'complete') {
+			monthFormatted = 'Completed';
+		} else {
+			monthFormatted = DateTime.fromObject(thisMonth[0].date).toFormat('LLLL');
 		}
 
 		const monthFolder = new Container({ selectors: ['folder', 'month'] });

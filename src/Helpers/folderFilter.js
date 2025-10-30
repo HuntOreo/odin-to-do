@@ -2,12 +2,15 @@ const getMonths = (taskList) => {
   const months = {}; // collect months
 
   for (let child of taskList) {
-    // If a task is missing assigned days or months, build a 'misc' folder
-    if (!child.date.day || !child.date.month) {
-      months.misc = []
+    // if a task is marked as complete, create the 'complete' folder.
+    if ( child.complete === true ) {
+      months.complete = [];
+    } else if (!child.date.day || !child.date.month) {
+      // If a task is missing assigned days or months, build a 'misc' folder
+      months.misc = [];
     } else {
       // if a task has a specific month, build a folder for that month
-      months[child.date.month] = []
+      months[child.date.month] = [];
     }
   }
 
@@ -15,20 +18,27 @@ const getMonths = (taskList) => {
   // Check for each child that matches the month or 'misc' folder
   for (let month in months) {
     for (let child of taskList) {
-      if (month == child.date.month) {
-        months[month].push(child)
+      if (child.complete === true) {
+        if (!months.complete.includes(child)) {
+          months.complete.push(child);
+        }
+        
+      } else if (month == child.date.month) {
+        months[month].push(child);
       }
     }
   }
 
   // any task without an assigned date is passed to the misc folder
   taskList.forEach(child => {
-    if (!child.date.day || !child.date.month) {
+    if (child.complete === true) {
+      months.complete.push;
+    } else if (!child.date.day || !child.date.month) {
       months.misc.push(child);
     }
   })
 
-  return months
+  return months;
 }
 
 const getDays = (month) => {

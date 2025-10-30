@@ -53,13 +53,23 @@ const handleCookies = (taskList) => {
     const cookieName = 'userTasks=';
     const tasksString = userTasksExist.slice(cookieName.length);
     const tasksArr = JSON.parse(tasksString);
-    newTaskList = [...tasksArr];
+    for (let task of tasksArr) {
+      const temp = new Task({
+        content: task.content,
+        date: task.date,
+        id: task.id,
+        title: task.title,
+        complete: task._complete
+      })
+      newTaskList.push(temp);
+    }
   }
 
   return newTaskList;
 }
 
 const updateCookie = (cookieName, data) => {
+  console.log(data);
   document.cookie = `${cookieName}=${JSON.stringify(data)}`
 }
 
