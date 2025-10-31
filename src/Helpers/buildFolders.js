@@ -2,37 +2,42 @@ import { Container, Head, Elem } from "elekit";
 import { DateTime } from "luxon";
 import Content from '../Components/Content/Content';
 import renderPreview from "./events/renderPreview";
-import { getMonths, getDays } from './folderFilter';
+import { buildParents, buildChildren } from './folderFilter';
 import deleteTask from './events/deleteTask';
 import completeTask from './events/completeTask';
 
 const buildFolders = (taskList, container) => {
-	const months = getMonths(taskList);
+	const parentFolders = buildParents(taskList);
+	console.log(parentFolders);
 
-	for (let month in months) {
-		let monthFormatted;
-		const thisMonth = months[month];
+	for (let folder of parentFolders) {
 
-		if (month === 'misc') {
-			monthFormatted = 'Misc';
-		} else if (month === 'complete') {
-			monthFormatted = 'Completed';
-		} else {
-			monthFormatted = DateTime.fromObject(thisMonth[0].date).toFormat('LLLL');
-		}
-
-		const monthFolder = new Container({ selectors: ['folder', 'month'] });
-		const monthHeader = new Head({ size: 2, content: monthFormatted });
-		monthFolder.append(monthHeader);
-
-
-		createDayFolders(monthFolder, thisMonth, taskList, month);
-		container.append(monthFolder.DOMElement);
 	}
+
+	// for (let month in months) {
+	// 	let monthFormatted;
+	// 	const thisMonth = months[month];
+
+	// 	if (month === 'misc') {
+	// 		monthFormatted = 'Misc';
+	// 	} else if (month === 'complete') {
+	// 		monthFormatted = 'Completed';
+	// 	} else {
+	// 		monthFormatted = DateTime.fromObject(thisMonth[0].date).toFormat('LLLL');
+	// 	}
+
+	// 	const monthFolder = new Container({ selectors: ['folder', 'month'] });
+	// 	const monthHeader = new Head({ size: 2, content: monthFormatted });
+	// 	monthFolder.append(monthHeader);
+
+
+	// 	createDayFolders(monthFolder, thisMonth, taskList, month);
+	// 	container.append(monthFolder.DOMElement);
+	// }
 }
 
 const createDayFolders = (monthFolder, month, taskList, monthName) => {
-	const days = getDays(month, monthName);
+	const days = buildChildren(month, monthName);
 	for (let day in days) {
 		console.log(days)
 		let thisDay;
@@ -42,21 +47,21 @@ const createDayFolders = (monthFolder, month, taskList, monthName) => {
 		} else {
 			thisDay = days[day][0].date.day;
 		}
-	
-			// build DOM elements
-			const dayFolder = new Container({ selectors: ['folder', 'day'] });
-			const dayHeader = new Head({ size: 3, content: thisDay });
-			dayFolder.append(dayHeader);
-			
-			dayFolder.addListener('click', (e) => {
-				
-				if (e.target.closest('.day') &&
-					!e.target.classList.contains('deleteTaskBtn')
-				) {
-					Content(taskList, days[day]);
-				}
-			})
-		
+
+		// build DOM elements
+		const dayFolder = new Container({ selectors: ['folder', 'day'] });
+		const dayHeader = new Head({ size: 3, content: thisDay });
+		dayFolder.append(dayHeader);
+
+		dayFolder.addListener('click', (e) => {
+
+			if (e.target.closest('.day') &&
+				!e.target.classList.contains('deleteTaskBtn')
+			) {
+				Content(taskList, days[day]);
+			}
+		})
+
 		if (monthName === 'complete') {
 			for (let task of month) {
 				console.log('test');
@@ -70,7 +75,7 @@ const createDayFolders = (monthFolder, month, taskList, monthName) => {
 		monthFolder.append(dayFolder);
 	}
 }
-		
+
 
 
 const handleTasks = (task, taskList, days, dayFolder) => {
@@ -94,7 +99,7 @@ const handleTasks = (task, taskList, days, dayFolder) => {
 	})
 	const completeBtn = taskFolder.DOMElement.querySelector('.completeBtn');
 	completeBtn.addEventListener('click', (e) => {
-		completeTask(task, taskList, days, );
+		completeTask(task, taskList, days,);
 	})
 	dayFolder.append(taskFolder);
 }
