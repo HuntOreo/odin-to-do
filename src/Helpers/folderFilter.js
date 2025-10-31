@@ -3,7 +3,7 @@ const buildParents = (taskList) => {
 
   for (let child of taskList) {
     const isComplete = child.complete;
-    const hasDate = Boolean(child.date.day != "" || child.date.month != "");
+    const hasDate = Boolean(child.date.day  || child.date.month);
 
     if (isComplete) { // Check for any completed tasks.
       if (!folders.some(obj => obj.name === 'complete')) {
@@ -42,9 +42,26 @@ const buildParents = (taskList) => {
   return folders;
 }
 
-const buildChildren = (month, monthName) => {
+const buildChildren = (parent, children) => {
+  const finalTree = [];
+  if (parent === 'month') {
+    const foldersSet = new Set(children.map(item => item.date.day));
+    
+    for (let day of foldersSet) {
+      const filtered = children.filter(task => task.date.day === day);
+      finalTree.push({
+        day,
+        tasks: filtered,
+      });
+    }
+  } else {
+    finalTree.push({
+      day: parent,
+      tasks: children,
+    });
+  }
 
-  // grab days from month
+  return finalTree;
 
 }
 
