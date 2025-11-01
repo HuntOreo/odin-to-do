@@ -1,6 +1,7 @@
 import { Container, Elem } from "elekit";
 import PreviewHeader from './PreviewHeader';
 import updateCard from '../../Helpers/events/updateCard';
+import { updateCookie } from "../../Helpers/handleCookies";
 
 const Form = (task, taskList) => {
 	const container = new Container('formContainer');
@@ -62,9 +63,8 @@ const Form = (task, taskList) => {
 		taskList[taskIndex].color = formColor;
 		taskList[taskIndex].priority = formPriority ? true : false;
 
-		if (card) {
-			updateCard(task)
-		}
+		updateCard(task);
+		updateCookie('userTasks', taskList);
 	});
 
 	container.append([PreviewHeader(task, taskList), form]);
