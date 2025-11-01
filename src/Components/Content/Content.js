@@ -1,7 +1,6 @@
 import { Container, Elem } from 'elekit';
 import Preview from '../Preview/Preview';
 import deleteTask from '../../Helpers/events/deleteTask';
-import toggleTaskCreator from '../../Helpers/events/toggleTaskCreator';
 import updateColor from '../../Helpers/events/updateColor';
 
 const Content = (taskList, days) => {

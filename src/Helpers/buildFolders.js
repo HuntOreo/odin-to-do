@@ -37,9 +37,7 @@ const renderTree = (treeArr, taskList, container) => {
 
 		for (let day of folder.children) {
 			const dayContainer = new Container('day');
-			console.log(folder.name);
 			if (folder.name !== 'misc' && folder.name !== 'complete') {	
-				console.log('test');			
 				const dayHeader = new Head({
 					size: 3,
 					content: day.day,

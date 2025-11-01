@@ -33,7 +33,7 @@ const PreviewHeader = (task, taskList) => {
   );
   calendarBtn.addListener('click', () => openDateInput(container.DOMElement));
 
-  container.append([date, hiddenDateInput, calendarBtn])
+  container.append([date, hiddenDateInput, calendarBtn]);
   return container;
 }
 

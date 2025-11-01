@@ -1,10 +1,11 @@
 const updateTaskCreator = (task, taskList) => {
   const app = document.querySelector('.app');
-  const taskCreator = app.querySelector('.taskCreator');
+  const taskCreatorHead = app.querySelector('.formContainer .head h1');
 
-  if (!taskCreator.classList.contains('hideElem')) {
+  console.log(task);
 
-  }
+  taskCreatorHead.textContent = `${task.date.month}/${task.date.day}`
+  
 }
 
 export default updateTaskCreator;
