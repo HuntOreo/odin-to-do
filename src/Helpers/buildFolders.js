@@ -5,6 +5,8 @@ import renderPreview from "./events/renderPreview";
 import { buildParents, buildChildren } from './folderFilter';
 import deleteTask from './events/deleteTask';
 import completeTask from './events/completeTask';
+import Sidebar_Showing from "../Components/Sidebar_Showing/Sidebar_Showing";
+import { container } from "webpack";
 
 const buildFolders = (taskList, container) => {
 	const parentFolders = buildParents(taskList);
@@ -25,9 +27,24 @@ const buildFolders = (taskList, container) => {
 	renderTree(treeBlueprint);
 }
 
-const renderTree = (treeArr) => {
+const renderTree = (treeArr) => {	
+	// console.log(container)
 	console.log(treeArr);
+	for (let folder of treeArr) {
+		const parentContainer = new Container('parent');
+		const parentHeader = new Head({
+			size: 2,
+			content: folder.name,
+		});
 
+		for (let task of folder) {
+			const childContainer = new Container('child');
+			const childHeader = new Head({
+				size: 3,
+				content: task.day
+			})
+		}
+	}
 }
 
 // const handleTasks = (task, taskList, days, dayFolder) => {
