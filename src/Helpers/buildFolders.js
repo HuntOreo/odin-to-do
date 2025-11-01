@@ -27,9 +27,7 @@ const buildFolders = (taskList, container) => {
 }
 
 const renderTree = (treeArr, taskList, container) => {	
-	console.log('tree: ', treeArr);
 	for (let folder of treeArr) {
-		console.log('parent: ', folder);
 		const parentContainer = new Container('parent');
 		const parentHeader = new Head({
 			size: 2,
@@ -39,7 +37,6 @@ const renderTree = (treeArr, taskList, container) => {
 		parentContainer.append(parentHeader);
 
 		for (let day of folder.children) {
-			console.log('day: ', day);
 			const dayContainer = new Container('day');
 			const dayHeader = new Head({
 				size: 3,
@@ -68,8 +65,8 @@ const renderTree = (treeArr, taskList, container) => {
 }
  
 const handleTasks= (task, taskFolder, taskList, days) => {
-	// create a new task in the tree
-
+	// Render sibling tasks into view on click 
+	taskFolder.addListener('click', () => Content(taskList, days))
 	// grab that tasks edit btn and assign listener
 	const editTaskBtn = taskFolder.DOMElement.querySelector('.editTaskBtn');
 	editTaskBtn.addEventListener('click', (e) => {
