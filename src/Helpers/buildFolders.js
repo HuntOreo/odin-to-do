@@ -5,7 +5,6 @@ import renderPreview from "./events/renderPreview";
 import { buildParents, buildChildren } from './folderFilter';
 import deleteTask from './events/deleteTask';
 import completeTask from './events/completeTask';
-import Sidebar_Showing from "../Components/Sidebar_Showing/Sidebar_Showing";
 
 const buildFolders = (taskList, container) => {
 	const parentFolders = buildParents(taskList);
@@ -38,12 +37,15 @@ const renderTree = (treeArr, taskList, container) => {
 
 		for (let day of folder.children) {
 			const dayContainer = new Container('day');
-			const dayHeader = new Head({
-				size: 3,
-				content: day.day,
-			});
 
-			dayContainer.append(dayHeader);
+			if (folder.name === 'month') {				
+				const dayHeader = new Head({
+					size: 3,
+					content: day.day,
+				});
+	
+				dayContainer.append(dayHeader);
+			}
 
 			for (let task of day.tasks) {
 				const taskFolder = new Elem({
