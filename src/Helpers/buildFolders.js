@@ -2,87 +2,73 @@ import { Container, Head, Elem } from "elekit";
 import { DateTime } from "luxon";
 import Content from '../Components/Content/Content';
 import renderPreview from "./events/renderPreview";
-import { getMonths, getDays } from './folderFilter';
+import { buildParents, buildChildren } from './folderFilter';
 import deleteTask from './events/deleteTask';
 import completeTask from './events/completeTask';
 
 const buildFolders = (taskList, container) => {
-	const months = getMonths(taskList);
+	const parentFolders = buildParents(taskList);
+	const treeBlueprint = [];
 
-	for (let month in months) {
-		let monthFormatted;
-		const thisMonth = months[month];
-
-		if (month === 'misc') {
-			monthFormatted = 'Misc';
-		} else if (month === 'complete') {
-			monthFormatted = 'Completed';
-		} else {
-			monthFormatted = DateTime.fromObject(thisMonth[0].date).toFormat('LLLL');
-		}
-
-		const monthFolder = new Container({ selectors: ['folder', 'month'] });
-		const monthHeader = new Head({ size: 2, content: monthFormatted });
-		monthFolder.append(monthHeader);
-
-
-		createDayFolders(monthFolder, thisMonth, taskList, month);
-		container.append(monthFolder.DOMElement);
+	for (let folder of parentFolders) {
+		const isMonth = Boolean(folder.name === 'month');
+		const folderName = isMonth ? 
+			DateTime.fromObject({month: folder.value}).toFormat('LLLL') : folder.name
+		
+		const children = buildChildren(folder.name, folder.tasks);
+		treeBlueprint.push({
+			name: folderName,
+			children,
+		});
 	}
+
+	renderTree(treeBlueprint, taskList, container);
 }
 
-const createDayFolders = (monthFolder, month, taskList, monthName) => {
-	const days = getDays(month, monthName);
-	for (let day in days) {
-		console.log(days)
-		let thisDay;
-		// if no date is provided, leave header blank.
-		if (monthName == 'complete' || monthName == 'misc') {
-			thisDay = '';
-		} else {
-			thisDay = days[day][0].date.day;
-		}
+const renderTree = (treeArr, taskList, container) => {	
+	for (let folder of treeArr) {
+		const parentContainer = new Container('parent');
+		const parentHeader = new Head({
+			size: 2,
+			content: folder.name,
+		});
+
+		parentContainer.append(parentHeader);
+
+		for (let day of folder.children) {
+			const dayContainer = new Container('day');
+
+			if (folder.name === 'month') {				
+				const dayHeader = new Head({
+					size: 3,
+					content: day.day,
+				});
 	
-			// build DOM elements
-			const dayFolder = new Container({ selectors: ['folder', 'day'] });
-			const dayHeader = new Head({ size: 3, content: thisDay });
-			dayFolder.append(dayHeader);
-			
-			dayFolder.addListener('click', (e) => {
-				
-				if (e.target.closest('.day') &&
-					!e.target.classList.contains('deleteTaskBtn')
-				) {
-					Content(taskList, days[day]);
-				}
-			})
-		
-		if (monthName === 'complete') {
-			for (let task of month) {
-				console.log('test');
-				handleTasks(task, taskList, month, dayFolder);
+				dayContainer.append(dayHeader);
 			}
-		} else {
-			for (let task of days[day]) {
-				handleTasks(task, taskList, days[day], dayFolder)
+
+			for (let task of day.tasks) {
+				const taskFolder = new Elem({
+					tag: 'div',
+					selectors: 'taskFolder', content: `
+					<span data-id="${task.id}">${task.title}</span>
+					<button class="editTaskBtn">⚙️</button>
+					<button class="deleteTaskBtn">🗑️</button>
+					<button class="completeBtn">✅</button>
+				`});
+
+				handleTasks(task, taskFolder, taskList, day.tasks)
+				dayContainer.append(taskFolder);
 			}
+			parentContainer.append(dayContainer);
 		}
-		monthFolder.append(dayFolder);
+		container.append(parentContainer.DOMElement);
 	}
 }
-		
-
-
-const handleTasks = (task, taskList, days, dayFolder) => {
-	// create a new task in the tree
-	const taskFolder = new Elem({
-		tag: 'div',
-		selectors: 'taskFolder', content: `
-		<span data-id="${task.id}">${task.title}</span>
-		<button class="editTaskBtn">⚙️</button>
-		<button class="deleteTaskBtn">🗑️</button>
-		<button class="completeBtn">✅</button>
-		`});
+ 
+const handleTasks= (task, taskFolder, taskList, days) => {
+	// Render sibling tasks into view on click 
+	taskFolder.addListener('click', () => Content(taskList, days))
 	// grab that tasks edit btn and assign listener
 	const editTaskBtn = taskFolder.DOMElement.querySelector('.editTaskBtn');
 	editTaskBtn.addEventListener('click', (e) => {
@@ -94,9 +80,8 @@ const handleTasks = (task, taskList, days, dayFolder) => {
 	})
 	const completeBtn = taskFolder.DOMElement.querySelector('.completeBtn');
 	completeBtn.addEventListener('click', (e) => {
-		completeTask(task, taskList, days, );
+		completeTask(task, taskList, days,);
 	})
-	dayFolder.append(taskFolder);
 }
 
 export {

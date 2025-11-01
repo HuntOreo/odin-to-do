@@ -1,64 +1,71 @@
-const getMonths = (taskList) => {
-  const months = {}; // collect months
+const buildParents = (taskList) => {
+  const folders = []; // Collect folders
 
   for (let child of taskList) {
-    // if a task is marked as complete, create the 'complete' folder.
-    if ( child.complete === true ) {
-      months.complete = [];
-    } else if (!child.date.day || !child.date.month) {
-      // If a task is missing assigned days or months, build a 'misc' folder
-      months.misc = [];
-    } else {
-      // if a task has a specific month, build a folder for that month
-      months[child.date.month] = [];
-    }
-  }
+    const isComplete = child.complete;
+    const hasDate = Boolean(child.date.day  || child.date.month);
 
-  // After month folders a documented, 
-  // Check for each child that matches the month or 'misc' folder
-  for (let month in months) {
-    for (let child of taskList) {
-      if (child.complete === true) {
-        if (!months.complete.includes(child)) {
-          months.complete.push(child);
-        }
-        
-      } else if (month == child.date.month) {
-        months[month].push(child);
+    if (isComplete) { // Check for any completed tasks.
+      if (!folders.some(obj => obj.name === 'complete')) {
+        folders.push({
+          name: 'complete',
+          tasks: [child],
+        });
+      } else {
+        const index = folders.findIndex(child => child.name === 'complete');
+        folders[index].tasks.push(child);
+      }
+    } else if (hasDate) { // Then check for any specified tasks.
+      if (!folders.some(obj => obj.value === child.date.month)) {
+        folders.push({
+          name: 'month',
+          value: child.date.month,
+          tasks: [child]
+        });
+      } else {
+        const index = folders.findIndex(obj => obj.value === child.date.month);
+        folders[index].tasks.push(child);
+      }
+    } else { // Otherwise, place in 'misc' folder.
+      if (!folders.some(obj => obj.name === 'misc')) {
+        folders.push({
+          name: 'misc',
+          tasks: [child],
+        });
+      } else {
+        const index = folders.findIndex(child => child.name === 'misc');
+        folders[index].tasks.push(child);
       }
     }
   }
 
-  // any task without an assigned date is passed to the misc folder
-  taskList.forEach(child => {
-    if (child.complete === true) {
-      months.complete.push;
-    } else if (!child.date.day || !child.date.month) {
-      months.misc.push(child);
-    }
-  })
-
-  return months;
+  return folders;
 }
 
-const getDays = (month, monthName) => {
-
-  // grab days from month
-  const days = {}
-  if(monthName === 'complete') {
-    return month;
-  } else {
-    for (let task of month) {
-      days[task.date.day] = month.filter(child => {
-        return child.date.day == task.date.day;
-      })
+const buildChildren = (parent, children) => {
+  const finalTree = [];
+  if (parent === 'month') {
+    const foldersSet = new Set(children.map(item => item.date.day));
+    
+    for (let day of foldersSet) {
+      const filtered = children.filter(task => task.date.day === day);
+      finalTree.push({
+        day,
+        tasks: filtered,
+      });
     }
-
-    return days;
+  } else {
+    finalTree.push({
+      day: parent,
+      tasks: children,
+    });
   }
+
+  return finalTree;
+
 }
 
 export {
-  getMonths,
-  getDays
+  buildParents,
+  buildChildren
 }
