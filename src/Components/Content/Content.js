@@ -25,7 +25,7 @@ const Content = (taskList, days) => {
             <div class='checkboxes'>
               <label>
                 Priority
-                <input class="priorityCheck" type='checkbox'>
+                <input class="priorityCheck" type='checkbox' ${task.priority ? 'checked' : null}>
               </label>
               <label>
                 Color
