@@ -3,6 +3,7 @@ import { openDateInput, updateDate } from '../../Helpers/events/handleDateInput'
 import { addTask } from '../../Helpers/events/addTask';
 import Preview from '../Preview/Preview';
 import toggleTaskCreator from '../../Helpers/events/toggleTaskCreator';
+import renderPreview from '../../Helpers/events/renderPreview';
 
 const TaskForm = (taskList) => {
   const container = new Container('form_container', { background: 'pink' })
@@ -38,7 +39,7 @@ const TaskForm = (taskList) => {
   calendarBtn.addListener('click', () => openDateInput(container.DOMElement));
   addTaskBtn.addListener('click', (e) => {
     const newTask = addTask(taskList);
-    Preview(newTask, taskList);
+    renderPreview(newTask.id, taskList)
   });
 
   container.append([form, dateInput, calendarBtn, addTaskBtn]);

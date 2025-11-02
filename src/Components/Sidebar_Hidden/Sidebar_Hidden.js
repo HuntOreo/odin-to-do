@@ -1,7 +1,6 @@
 import { Button, Container } from 'elekit';
 import renderPreview from '../../Helpers/events/renderPreview';
 import toggleSidebar from '../../Helpers/events/toggleSidebar';
-import toggleTaskCreator from '../../Helpers/events/toggleTaskCreator';
 
 const Sidebar_Hidden = (taskList) => {
   const container = new Container({ selectors: ['sidebar_hidden'] });

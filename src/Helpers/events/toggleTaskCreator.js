@@ -9,7 +9,8 @@ const toggleTaskCreator = (e, taskList) => {
 	if (isHidden) {
 		if (
 			target.classList.contains('open_preview') ||
-			target.classList.contains('editTaskBtn')
+			target.classList.contains('editTaskBtn') || 
+			target.classList.contains('addTaskBtn')
 		) {
 			taskCreator.classList.toggle('hideElem');
 		}
