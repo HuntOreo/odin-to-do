@@ -2,6 +2,7 @@ import { Container, Elem } from 'elekit';
 import Preview from '../Preview/Preview';
 import deleteTask from '../../Helpers/events/deleteTask';
 import updateColor from '../../Helpers/events/updateColor';
+import updatePriority from '../../Helpers/events/updatePriority';
 
 const Content = (taskList, days) => {
   let container = document.querySelector('.content');
@@ -53,18 +54,16 @@ const Content = (taskList, days) => {
       const editTaskBtn = taskCard.DOMElement.querySelector('.editTaskBtn');
       const deleteTaskBtn = taskCard.DOMElement.querySelector('.deleteTaskBtn');
       const assignColorInput = taskCard.DOMElement.querySelector('.assignColor');
+      const priorityBox = taskCard.DOMElement.querySelector('.priorityCheck');
 
-      editTaskBtn.addEventListener('click', (e) => {
-        Preview(task, taskList);
-      });
-      deleteTaskBtn.addEventListener('click', (e) => {
-        deleteTask(task.id, taskList, days);
-      });
+      editTaskBtn.addEventListener('click', () => Preview(task, taskList));
+      deleteTaskBtn.addEventListener('click', () => deleteTask(task.id, taskList, days));
       assignColorInput.addEventListener('input', (e) => {
         console.log(e.target.value);
         const color = e.target.value;
         updateColor(color, taskCard, task, taskList);
       });
+      priorityBox.addEventListener('change', (e) =>  updatePriority(e, task, taskList))
 
       tasksWrapper.append(taskCard)
     }

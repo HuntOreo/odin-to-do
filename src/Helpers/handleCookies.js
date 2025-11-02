@@ -59,7 +59,8 @@ const handleCookies = (taskList) => {
         date: task.date,
         id: task.id,
         title: task.title,
-        complete: task._complete
+        complete: task._complete,
+        priority: task._priority
       })
       newTaskList.push(temp);
     }
@@ -69,7 +70,7 @@ const handleCookies = (taskList) => {
 }
 
 const updateCookie = (cookieName, data) => {
-  document.cookie = `${cookieName}=${JSON.stringify(data)}`
+  document.cookie = `${cookieName}=${JSON.stringify(data)}`;
 }
 
 export {

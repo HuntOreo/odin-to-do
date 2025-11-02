@@ -12,12 +12,13 @@ const buildFolders = (taskList, container) => {
 
 	for (let folder of parentFolders) {
 		const isMonth = Boolean(folder.name === 'month');
-		const folderName = isMonth ? 
+		const folderTitle = isMonth ? 
 			DateTime.fromObject({month: folder.value}).toFormat('LLLL') : folder.name
 		
 		const children = buildChildren(folder.name, folder.tasks);
 		treeBlueprint.push({
-			name: folderName,
+			type: folder.name,
+			name: folderTitle,
 			weight: folder.weight,
 			children,
 		});
@@ -40,7 +41,8 @@ const renderTree = (treeArr, taskList, container) => {
 
 		for (let day of folder.children) {
 			const dayContainer = new Container('day');
-			if (folder.name !== 'Misc' && folder.name !== 'Complete') {	
+			console.log(folder.type);
+			if (folder.type === 'month') {	
 				const dayHeader = new Head({
 					size: 3,
 					content: day.day,

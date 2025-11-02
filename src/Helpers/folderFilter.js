@@ -1,8 +1,8 @@
 const buildParents = (taskList) => {
   const folders = []; // Collect folders
-
   for (let child of taskList) {
     const isComplete = child.complete;
+    const isPriority = child.priority;
     const hasDate = Boolean(child.date.day  || child.date.month);
 
     if (isComplete) { // Check for any completed tasks.
@@ -16,6 +16,17 @@ const buildParents = (taskList) => {
         const index = folders.findIndex(child => child.name === 'Complete');
         folders[index].tasks.push(child);
       }
+    } else if (isPriority) {
+        if (!folders.some(obj => obj.value === 'Priority')) {
+          folders.push({
+            name: 'Priority',
+            weight: 0,
+            tasks: [child],
+          });
+        } else {
+          const index = folders.findIndex(child => child.name === 'Priority');
+          folders[index].tasks.push(child);
+        }
     } else if (hasDate) { // Then check for any specified tasks.
       if (!folders.some(obj => obj.value === child.date.month)) {
         folders.push({

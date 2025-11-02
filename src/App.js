@@ -9,6 +9,7 @@ import { handleCookies } from './Helpers/handleCookies';
 const App = function (taskList) {
 
   taskList = handleCookies(taskList);
+  console.log(taskList);
 
   const app = new Container({ selectors: 'app' });
   const main = new Elem({ tag: 'main' });
