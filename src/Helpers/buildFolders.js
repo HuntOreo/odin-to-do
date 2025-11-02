@@ -18,11 +18,14 @@ const buildFolders = (taskList, container) => {
 		const children = buildChildren(folder.name, folder.tasks);
 		treeBlueprint.push({
 			name: folderName,
+			weight: folder.weight,
 			children,
 		});
 	}
 
-	renderTree(treeBlueprint, taskList, container);
+	const organizedFolders = organizeFolders(treeBlueprint);
+
+	renderTree(organizedFolders, taskList, container);
 }
 
 const renderTree = (treeArr, taskList, container) => {	
@@ -81,6 +84,18 @@ const handleTasks= (task, taskFolder, taskList, days) => {
 	completeBtn.addEventListener('click', (e) => {
 		completeTask(task, taskList, days,);
 	})
+}
+
+const organizeFolders = (folders) => {
+	folders.sort((a, b) => {
+		if (a.weight < b.weight ) {
+			return -1
+		} else if (a.weight > b.weight) {
+			return 1
+		}
+	})
+
+	return folders;
 }
 
 export {

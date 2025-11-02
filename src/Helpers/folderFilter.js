@@ -9,6 +9,7 @@ const buildParents = (taskList) => {
       if (!folders.some(obj => obj.name === 'Complete')) {
         folders.push({
           name: 'Complete',
+          weight: 14,
           tasks: [child],
         });
       } else {
@@ -20,6 +21,7 @@ const buildParents = (taskList) => {
         folders.push({
           name: 'month',
           value: child.date.month,
+          weight: child.date.month,
           tasks: [child]
         });
       } else {
@@ -30,6 +32,7 @@ const buildParents = (taskList) => {
       if (!folders.some(obj => obj.name === 'Misc')) {
         folders.push({
           name: 'Misc',
+          weight: 13,
           tasks: [child],
         });
       } else {
