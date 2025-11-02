@@ -2,6 +2,7 @@ import { Container, Elem } from "elekit";
 import PreviewHeader from './PreviewHeader';
 import updateCard from '../../Helpers/events/updateCard';
 import { updateCookie } from "../../Helpers/handleCookies";
+import updatePriority from "../../Helpers/events/updatePriority";
 
 const Form = (task, taskList) => {
 	const container = new Container('formContainer');
@@ -66,6 +67,8 @@ const Form = (task, taskList) => {
 		updateCard(task);
 		updateCookie('userTasks', taskList);
 	});
+
+	priorityBox.addEventListener('change', (e) =>  updatePriority(e, task, taskList))
 
 	container.append([PreviewHeader(task, taskList), form]);
 	return container;
