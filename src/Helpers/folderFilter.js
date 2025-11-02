@@ -6,13 +6,13 @@ const buildParents = (taskList) => {
     const hasDate = Boolean(child.date.day  || child.date.month);
 
     if (isComplete) { // Check for any completed tasks.
-      if (!folders.some(obj => obj.name === 'complete')) {
+      if (!folders.some(obj => obj.name === 'Complete')) {
         folders.push({
-          name: 'complete',
+          name: 'Complete',
           tasks: [child],
         });
       } else {
-        const index = folders.findIndex(child => child.name === 'complete');
+        const index = folders.findIndex(child => child.name === 'Complete');
         folders[index].tasks.push(child);
       }
     } else if (hasDate) { // Then check for any specified tasks.
@@ -26,14 +26,14 @@ const buildParents = (taskList) => {
         const index = folders.findIndex(obj => obj.value === child.date.month);
         folders[index].tasks.push(child);
       }
-    } else { // Otherwise, place in 'misc' folder.
-      if (!folders.some(obj => obj.name === 'misc')) {
+    } else { // Otherwise, place in 'Misc' folder.
+      if (!folders.some(obj => obj.name === 'Misc')) {
         folders.push({
-          name: 'misc',
+          name: 'Misc',
           tasks: [child],
         });
       } else {
-        const index = folders.findIndex(child => child.name === 'misc');
+        const index = folders.findIndex(child => child.name === 'Misc');
         folders[index].tasks.push(child);
       }
     }
