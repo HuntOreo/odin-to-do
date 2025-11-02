@@ -17,7 +17,7 @@ const buildParents = (taskList) => {
         folders[index].tasks.push(child);
       }
     } else if (isPriority) {
-        if (!folders.some(obj => obj.value === 'Priority')) {
+        if (!folders.some(obj => obj.name === 'Priority')) {
           folders.push({
             name: 'Priority',
             weight: 0,

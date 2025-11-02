@@ -1,3 +1,4 @@
+import Sidebar_Showing from "../../Components/Sidebar_Showing/Sidebar_Showing";
 import { updateCookie } from "../handleCookies";
 
 const updatePriority = (e, task, taskList) => {
@@ -7,6 +8,7 @@ const updatePriority = (e, task, taskList) => {
     taskList[index] = task;
 
     updateCookie('userTasks', taskList);
+    Sidebar_Showing(taskList);
 }
 
 export default updatePriority
