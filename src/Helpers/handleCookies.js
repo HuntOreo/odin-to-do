@@ -5,7 +5,12 @@ const handleCookies = (taskList) => {
   const cookies = document.cookie.split('; ');
 
   // find cookie storing tasks
-  const userTasksExist = cookies.find(cookie => cookie.startsWith('userTasks='));
+  const userTasksExist = cookies.find(cookie => {
+    if (cookie.startsWith('userTasks=')) {
+      return true;
+    }
+  });
+
   if (!userTasksExist) {
     // create cookie if none exists, store default data.
     newTaskList = [
@@ -60,7 +65,8 @@ const handleCookies = (taskList) => {
         id: task.id,
         title: task.title,
         complete: task._complete,
-        priority: task._priority
+        priority: task._priority,
+        color: task._color,
       })
       newTaskList.push(temp);
     }

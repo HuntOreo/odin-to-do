@@ -29,7 +29,7 @@ const Content = (taskList, days) => {
               </label>
               <label>
                 Color
-                <input class="assignColor" type='color'>
+                <input class="assignColor" type='color' value='${task.color}'>
               </label>
             </div>
             <div class="btns">
@@ -63,7 +63,7 @@ const Content = (taskList, days) => {
         const color = e.target.value;
         updateColor(color, taskCard, task, taskList);
       });
-      priorityBox.addEventListener('change', (e) =>  updatePriority(e, task, taskList))
+      priorityBox.addEventListener('change', (e) => updatePriority(e, task, taskList))
 
       tasksWrapper.append(taskCard)
     }

@@ -7,7 +7,7 @@ class Task {
     if (content) { this.content = content };
     if (date) { this.date = { ...date }; }
     priority ? this._priority = true : this._priority = false;
-    color ? this._color = color : this._color = '#FFF';
+    color ? this._color = color : this._color = '#000';
     complete ? this._complete = true : this._complete = false;
   }
 
@@ -16,6 +16,9 @@ class Task {
 
   get priority() { return this._priority; }
   set priority(flag) { this._priority = flag; }
+
+  get color() { return this._color; }
+  set color(value) { this._color = value; }
 }
 
 export default Task;
