@@ -3,6 +3,7 @@ import Preview from '../Preview/Preview';
 import deleteTask from '../../Helpers/events/deleteTask';
 import updateColor from '../../Helpers/events/updateColor';
 import updatePriority from '../../Helpers/events/updatePriority';
+import { updateCookie } from '../../Helpers/handleCookies';
 
 const Content = (taskList, days) => {
   let container = document.querySelector('.content');
@@ -59,9 +60,9 @@ const Content = (taskList, days) => {
       editTaskBtn.addEventListener('click', () => Preview(task, taskList));
       deleteTaskBtn.addEventListener('click', () => deleteTask(task.id, taskList, days));
       assignColorInput.addEventListener('input', (e) => {
-        console.log(e.target.value);
         const color = e.target.value;
         updateColor(color, taskCard, task, taskList);
+        updateCookie('userTasks', taskList);
       });
       priorityBox.addEventListener('change', (e) => updatePriority(e, task, taskList))
 

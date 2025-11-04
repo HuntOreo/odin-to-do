@@ -6,8 +6,6 @@ const updateColor = (color, card, task, taskList) => {
   taskList[index] = task;
 
   card.style.border = `2px solid ${color}`;
-  updateCookie('userTasks', taskList);
-  console.log(document.cookie)
 }
 
 export default updateColor

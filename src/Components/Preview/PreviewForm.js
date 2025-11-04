@@ -3,6 +3,8 @@ import PreviewHeader from './PreviewHeader';
 import updateCard from '../../Helpers/events/updateCard';
 import { updateCookie } from "../../Helpers/handleCookies";
 import updatePriority from "../../Helpers/events/updatePriority";
+import updateColor from '../../Helpers/events/updateColor';
+import getCard from '../../Helpers/getCard';
 
 const Form = (task, taskList) => {
 	const container = new Container('formContainer');
@@ -23,7 +25,7 @@ const Form = (task, taskList) => {
 				</label>
 				<label for="colorBox">
 					Color
-					<input type="color" id="colorBox" name="color">
+					<input type="color" id="colorBox" name="color" value="${task.color}">
 				</label>
 			</div>
 			<button id="submitTask" type="submit">+</button>
@@ -45,6 +47,14 @@ const Form = (task, taskList) => {
 
 		const taskIndex = taskList.findIndex(child => child === task);
 		taskList[taskIndex].title = e.target.value;
+	});
+
+	colorInput.addEventListener('change', (e) => {
+		const color = e.target.value;
+		const card = getCard(task);
+		updateColor(color, card, task, taskList);
+
+		card.querySelector('input[type="color"]').value = color;
 	})
 
 	submitBtn.addEventListener('click', (e) => {
@@ -68,7 +78,7 @@ const Form = (task, taskList) => {
 		updateCookie('userTasks', taskList);
 	});
 
-	priorityBox.addEventListener('change', (e) =>  updatePriority(e, task, taskList))
+	priorityBox.addEventListener('change', (e) => updatePriority(e, task, taskList))
 
 	container.append([PreviewHeader(task, taskList), form]);
 	return container;
