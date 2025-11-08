@@ -5,11 +5,12 @@ import Sidebar_Showing from './Components/Sidebar_Showing/Sidebar_Showing';
 import Preview from './Components/Preview/Preview';
 import Content from './Components/Content/Content';
 import { getAppStateFromCookies, getTasksFromCookies } from './Helpers/handleCookies';
+import { applyAppState } from './Helpers/handleAppState';
 
 const App = function (taskList, appStateHolder) {
 
   taskList = getTasksFromCookies(taskList);
-  appStateHolder = getAppStateFromCookies(appStateHolder)
+  appStateHolder = getAppStateFromCookies(appStateHolder);
 
   const app = new Container({ selectors: 'app' });
   const main = new Elem({ tag: 'main' });
@@ -22,9 +23,16 @@ const App = function (taskList, appStateHolder) {
 
   app.append([
     Header(),
-    Sidebar_Hidden(taskList),
+    Sidebar_Hidden(taskList, appStateHolder),
     main
   ]);
+
+  for (let stateName in appStateHolder) {
+    applyAppState({
+      stateName,
+      stateValue: appStateHolder[stateName]
+    }, app.DOMElement)
+  }
 
   return app;
 }

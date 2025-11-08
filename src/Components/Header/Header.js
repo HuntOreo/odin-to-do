@@ -1,5 +1,4 @@
-import { Button, Elem, Head } from 'elekit';
-import toggleSidebar from '../../Helpers/events/toggleSidebar';
+import { Elem, Head } from 'elekit';
 
 const Header = function () {
   const header = new Elem({

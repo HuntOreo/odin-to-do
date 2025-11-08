@@ -81,6 +81,7 @@ const getAppStateFromCookies = (appStateHolder) => {
 }
 
 const updateCookie = (cookieName, data) => {
+
   document.cookie = `${cookieName}=${JSON.stringify(data)}`;
 }
 

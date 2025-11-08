@@ -2,7 +2,7 @@ import { Button, Container } from 'elekit';
 import renderPreview from '../../Helpers/events/renderPreview';
 import toggleSidebar from '../../Helpers/events/toggleSidebar';
 
-const Sidebar_Hidden = (taskList) => {
+const Sidebar_Hidden = (taskList, appStateHolder) => {
   const container = new Container({ selectors: ['sidebar_hidden'] });
   const openPreview = new Button({
     content: '+',
@@ -14,7 +14,7 @@ const Sidebar_Hidden = (taskList) => {
   });
 
   openSidebar.addListener('click', (e) => {
-    toggleSidebar();
+    toggleSidebar(appStateHolder);
   })
 
   openPreview.addListener('click', (e) => {
