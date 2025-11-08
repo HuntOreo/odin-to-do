@@ -4,12 +4,12 @@ import Sidebar_Hidden from './Components/Sidebar_Hidden/Sidebar_Hidden';
 import Sidebar_Showing from './Components/Sidebar_Showing/Sidebar_Showing';
 import Preview from './Components/Preview/Preview';
 import Content from './Components/Content/Content';
-import { handleCookies } from './Helpers/handleCookies';
+import { getAppStateFromCookies, getTasksFromCookies } from './Helpers/handleCookies';
 
-const App = function (taskList) {
+const App = function (taskList, appStateHolder) {
 
-  taskList = handleCookies(taskList);
-  console.log(document.cookie);
+  taskList = getTasksFromCookies(taskList);
+  appStateHolder = getAppStateFromCookies(appStateHolder)
 
   const app = new Container({ selectors: 'app' });
   const main = new Elem({ tag: 'main' });

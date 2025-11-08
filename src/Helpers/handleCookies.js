@@ -1,17 +1,11 @@
 import Task from '../Task_Class';
 
-const handleCookies = (taskList) => {
+const getTasksFromCookies = (taskList) => {
   let newTaskList = [];
-  const cookies = document.cookie.split('; ');
 
-  // find cookie storing tasks
-  const userTasksExist = cookies.find(cookie => {
-    if (cookie.startsWith('userTasks=')) {
-      return true;
-    }
-  });
+  const existingUserTasks = findCookie('userTasks');
 
-  if (!userTasksExist) {
+  if (!existingUserTasks) {
     // create cookie if none exists, store default data.
     newTaskList = [
       new Task({
@@ -53,11 +47,10 @@ const handleCookies = (taskList) => {
     ];
 
     document.cookie = `userTasks=${JSON.stringify(taskList)}`;
-  } else {
-
+  } else { 
     const cookieName = 'userTasks=';
-    const tasksString = userTasksExist.slice(cookieName.length);
-    const tasksArr = JSON.parse(tasksString);
+    const tasksJSON = existingUserTasks.slice(cookieName.length);
+    const tasksArr = JSON.parse(tasksJSON);
     for (let task of tasksArr) {
       const temp = new Task({
         content: task.content,
@@ -71,15 +64,41 @@ const handleCookies = (taskList) => {
       newTaskList.push(temp);
     }
   }
-
   return newTaskList;
+}
+
+const getAppStateFromCookies = (appStateHolder) => {
+  const existingAppState = findCookie('appState');
+  if (!existingAppState) {
+    updateCookie('appState', appStateHolder);
+  } else {
+    const cookieName = 'appState=';
+    const stateJSON = existingAppState.slice(cookieName.length);
+    const stateObj = JSON.parse(stateJSON);
+    
+    return stateObj;
+  }
 }
 
 const updateCookie = (cookieName, data) => {
   document.cookie = `${cookieName}=${JSON.stringify(data)}`;
 }
 
+const findCookie = (cookieName) => {
+  const cookies = document.cookie.split('; ');
+  // find cookie storing tasks
+  const cookie = cookies.find(cookie => {
+    if (cookie.startsWith(`${cookieName}=`)) {
+      return true;
+    }
+  });
+
+  return cookie;
+}
+
+
 export {
-  handleCookies,
+  getTasksFromCookies,
+  getAppStateFromCookies,
   updateCookie
 };

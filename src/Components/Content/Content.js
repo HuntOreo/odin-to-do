@@ -47,7 +47,7 @@ const Content = (taskList, days) => {
       // Apply color code if one exists.
       if (task.color) {
         taskCard.applyTemplate({
-          border: `2px solid ${task.color}`
+          border: `3px solid ${task.color}`
         });
       }
 
