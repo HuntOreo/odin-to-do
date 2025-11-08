@@ -11,10 +11,10 @@ const toggleSidebar = (appStateHolder) => {
   
   if (!isHidden) {
     previewBtn.classList.toggle('hideElem');
-    sidebarBtn.textContent = '<';
+    sidebarBtn.textContent = '>';
   } else {
     previewBtn.classList.toggle('hideElem');
-    sidebarBtn.textContent = '>';
+    sidebarBtn.textContent = '<';
   }
 
   appStateHolder = updateAppState('mainSidebar', isHidden, appStateHolder);
