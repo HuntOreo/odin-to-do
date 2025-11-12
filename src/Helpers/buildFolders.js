@@ -5,8 +5,9 @@ import renderPreview from "./events/renderPreview";
 import { buildParents, buildChildren } from './folderFilter';
 import deleteTask from './events/deleteTask';
 import completeTask from './events/completeTask';
+import { updateCookie } from './handleCookies';
 
-const buildFolders = (taskList, container) => {
+const buildFolders = (taskList, container, appStateHolder) => {
 	const parentFolders = buildParents(taskList);
 	const treeBlueprint = [];
 
@@ -26,10 +27,10 @@ const buildFolders = (taskList, container) => {
 
 	const organizedFolders = organizeFolders(treeBlueprint);
 
-	renderTree(organizedFolders, taskList, container);
+	renderTree(organizedFolders, taskList, container, appStateHolder);
 }
 
-const renderTree = (treeArr, taskList, container) => {
+const renderTree = (treeArr, taskList, container, appStateHolder) => {
 	for (let folder of treeArr) {
 		const parentContainer = new Container('parent');
 		const parentHeader = new Head({
@@ -60,7 +61,7 @@ const renderTree = (treeArr, taskList, container) => {
 					<button class="completeBtn">✅</button>
 				`});
 
-				handleTasks(task, taskFolder, taskList, day.tasks)
+				handleTasks(task, taskFolder, taskList, day.tasks, appStateHolder)
 				dayContainer.append(taskFolder);
 			}
 			parentContainer.append(dayContainer);
@@ -69,9 +70,13 @@ const renderTree = (treeArr, taskList, container) => {
 	}
 }
 
-const handleTasks = (task, taskFolder, taskList, days) => {
+const handleTasks = (task, taskFolder, taskList, days, appStateHolder) => {
 	// Render sibling tasks into view on click 
-	taskFolder.addListener('click', () => Content(taskList, days))
+	taskFolder.addListener('click', () => {
+		Content(taskList, days);
+		appStateHolder.content = days;
+		updateCookie('appState', appStateHolder);
+	});
 	// grab that tasks edit btn and assign listener
 	const editTaskBtn = taskFolder.DOMElement.querySelector('.editTaskBtn');
 	editTaskBtn.addEventListener('click', (e) => {

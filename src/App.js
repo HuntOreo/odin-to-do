@@ -16,10 +16,16 @@ const App = function (taskList, appStateHolder) {
   const main = new Elem({ tag: 'main' });
 
   main.append([
-    Sidebar_Showing(taskList),
+    Sidebar_Showing(taskList, appStateHolder),
     Preview(),
-    Content(),
   ]);
+
+  if (!appStateHolder.content === null) {
+    main.append(Content());
+  } else {
+    console.log('test');
+    main.append(Content(taskList, appStateHolder.content));
+  }
 
   app.append([
     Header(),

@@ -47,7 +47,7 @@ const getTasksFromCookies = (taskList) => {
     ];
 
     document.cookie = `userTasks=${JSON.stringify(taskList)}`;
-  } else { 
+  } else {
     const cookieName = 'userTasks=';
     const tasksJSON = existingUserTasks.slice(cookieName.length);
     const tasksArr = JSON.parse(tasksJSON);
@@ -75,19 +75,17 @@ const getAppStateFromCookies = (appStateHolder) => {
     const cookieName = 'appState=';
     const stateJSON = existingAppState.slice(cookieName.length);
     const stateObj = JSON.parse(stateJSON);
-    
+
     return stateObj;
   }
 }
 
 const updateCookie = (cookieName, data) => {
-
   document.cookie = `${cookieName}=${JSON.stringify(data)}`;
 }
 
 const findCookie = (cookieName) => {
   const cookies = document.cookie.split('; ');
-  // find cookie storing tasks
   const cookie = cookies.find(cookie => {
     if (cookie.startsWith(`${cookieName}=`)) {
       return true;

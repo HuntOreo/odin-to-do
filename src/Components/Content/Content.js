@@ -11,15 +11,23 @@ const Content = (taskList, days) => {
   // if Content element doesnt exist, build it.
   if (!container) {
     container = new Container('content', { background: 'hotpink' });
+    renderContent(taskList, days, container.DOMElement);
+    return container;
   } else if (container) {
-    const tasksWrapper = new Container('wrapper');
-    // wipe content for re-rendering
-    container.textContent = '';
-    for (let task of days) {
-      const taskCard = new Elem({
-        tag: 'div',
-        selectors: 'taskCard',
-        content: `
+    renderContent(taskList, days, container);
+    return container;
+  }
+}
+
+const renderContent = (taskList, days, container) => {
+  const tasksWrapper = new Container('wrapper');
+  // wipe content for re-rendering
+  container.textContent = '';
+  for (let task of days) {
+    const taskCard = new Elem({
+      tag: 'div',
+      selectors: 'taskCard',
+      content: `
           <h2>${task.title}</h2>
           <p>${task.content ? task.content : 'Content...'}</p>
           <div class='container'>
@@ -39,38 +47,36 @@ const Content = (taskList, days) => {
             </div>
           </div>
         `
+    });
+
+    // Assign pair task with card by ID.
+    taskCard.DOMElement.dataset.id = task.id;
+
+    // Apply color code if one exists.
+    if (task.color) {
+      taskCard.applyTemplate({
+        border: `3px solid ${task.color}`
       });
-
-      // Assign pair task with card by ID.
-      taskCard.DOMElement.dataset.id = task.id;
-
-      // Apply color code if one exists.
-      if (task.color) {
-        taskCard.applyTemplate({
-          border: `3px solid ${task.color}`
-        });
-      }
-
-      // Assign Event Listeners
-      const editTaskBtn = taskCard.DOMElement.querySelector('.editTaskBtn');
-      const deleteTaskBtn = taskCard.DOMElement.querySelector('.deleteTaskBtn');
-      const assignColorInput = taskCard.DOMElement.querySelector('.assignColor');
-      const priorityBox = taskCard.DOMElement.querySelector('.priorityCheck');
-
-      editTaskBtn.addEventListener('click', () => Preview(task, taskList));
-      deleteTaskBtn.addEventListener('click', () => deleteTask(task.id, taskList, days));
-      assignColorInput.addEventListener('input', (e) => {
-        const color = e.target.value;
-        updateColor(color, taskCard, task, taskList);
-        updateCookie('userTasks', taskList);
-      });
-      priorityBox.addEventListener('change', (e) => updatePriority(e, task, taskList))
-
-      tasksWrapper.append(taskCard)
     }
-    container.append(tasksWrapper.DOMElement);
-  }
 
-  return container;
+    // Assign Event Listeners
+    const editTaskBtn = taskCard.DOMElement.querySelector('.editTaskBtn');
+    const deleteTaskBtn = taskCard.DOMElement.querySelector('.deleteTaskBtn');
+    const assignColorInput = taskCard.DOMElement.querySelector('.assignColor');
+    const priorityBox = taskCard.DOMElement.querySelector('.priorityCheck');
+
+    editTaskBtn.addEventListener('click', () => Preview(task, taskList));
+    deleteTaskBtn.addEventListener('click', () => deleteTask(task.id, taskList, days));
+    assignColorInput.addEventListener('input', (e) => {
+      const color = e.target.value;
+      updateColor(color, taskCard, task, taskList);
+      updateCookie('userTasks', taskList);
+    });
+    priorityBox.addEventListener('change', (e) => updatePriority(e, task, taskList))
+
+    tasksWrapper.append(taskCard)
+  }
+  container.append(tasksWrapper.DOMElement);
 }
+
 export default Content;

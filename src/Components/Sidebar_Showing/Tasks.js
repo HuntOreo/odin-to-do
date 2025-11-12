@@ -1,7 +1,7 @@
 import { Container } from 'elekit';
 import { buildFolders } from '../../Helpers/buildFolders';
 
-const Tasks = (taskList) => {
+const Tasks = (taskList, appStateHolder) => {
   let tasksContainer = document.querySelector('.sidebar_showing .tasks');
 
   if (tasksContainer) {
@@ -14,9 +14,9 @@ const Tasks = (taskList) => {
   // Check if container is a DOM element (it existed)
   // or if its a Elem Object (it didnt exist)
   if (tasksContainer.DOMElement) {
-    buildFolders(taskList, tasksContainer.DOMElement );
+    buildFolders(taskList, tasksContainer.DOMElement, appStateHolder);
   } else {
-    buildFolders(taskList, tasksContainer);
+    buildFolders(taskList, tasksContainer, appStateHolder);
   }
   return tasksContainer;
 }
