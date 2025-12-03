@@ -11,6 +11,7 @@ const App = function (taskList, appStateHolder) {
 
   taskList = getTasksFromCookies(taskList);
   appStateHolder = getAppStateFromCookies(appStateHolder);
+  console.log(appStateHolder);
 
   const app = new Container({ selectors: 'app' });
   const main = new Elem({ tag: 'main' });
@@ -20,10 +21,9 @@ const App = function (taskList, appStateHolder) {
     Preview(),
   ]);
 
-  if (!appStateHolder.content === null) {
+  if (!(appStateHolder.content === null)) {
     main.append(Content());
   } else {
-    console.log('test');
     main.append(Content(taskList, appStateHolder.content));
   }
 

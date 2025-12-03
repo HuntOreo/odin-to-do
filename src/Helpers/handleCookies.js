@@ -71,6 +71,7 @@ const getAppStateFromCookies = (appStateHolder) => {
   const existingAppState = findCookie('appState');
   if (!existingAppState) {
     updateCookie('appState', appStateHolder);
+    return appStateHolder;
   } else {
     const cookieName = 'appState=';
     const stateJSON = existingAppState.slice(cookieName.length);
