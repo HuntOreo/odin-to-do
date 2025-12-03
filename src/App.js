@@ -22,7 +22,7 @@ const App = function (taskList, appStateHolder) {
   ]);
 
   if (!(appStateHolder.content === null)) {
-    main.append(Content());
+    main.append(Content(taskList));
   } else {
     main.append(Content(taskList, appStateHolder.content));
   }

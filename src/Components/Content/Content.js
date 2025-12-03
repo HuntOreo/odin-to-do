@@ -11,12 +11,12 @@ const Content = (taskList, days) => {
   // if Content element doesnt exist, build it.
   if (!container) {
     container = new Container('content', { background: 'hotpink' });
-    if (days !== null) {
+    if (days) { // if days exist...
       renderContent(taskList, days, container.DOMElement);
     }
     return container;
   } else if (container) {
-    if (days !== null) {
+    if (days) { // if days exist...
       renderContent(taskList, days, container);
     }
     return container;
