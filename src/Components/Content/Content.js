@@ -70,7 +70,7 @@ const renderContent = (taskList, tasks, container) => {
     const priorityBox = taskCard.DOMElement.querySelector('.priorityCheck');
 
     editTaskBtn.addEventListener('click', () => Preview(task, taskList));
-    deleteTaskBtn.addEventListener('click', () => deleteTask(task.id, taskList, days));
+    deleteTaskBtn.addEventListener('click', () => deleteTask(task.id, taskList, tasks));
     assignColorInput.addEventListener('input', (e) => {
       const color = e.target.value;
       updateColor(color, taskCard, task, taskList);
