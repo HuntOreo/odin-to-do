@@ -20,10 +20,10 @@ const App = function (taskList, appStateHolder) {
     Preview(),
   ]);
 
-  if (!appStateHolder.content === null) {
+  if (appStateHolder.content === null) {
     main.append(Content());
   } else {
-    console.log('test');
+    console.log(appStateHolder);
     main.append(Content(taskList, appStateHolder.content));
   }
 
