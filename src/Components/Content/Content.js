@@ -5,29 +5,29 @@ import updateColor from '../../Helpers/events/updateColor';
 import updatePriority from '../../Helpers/events/updatePriority';
 import { updateCookie } from '../../Helpers/handleCookies';
 
-const Content = (taskList, days) => {
+const Content = (taskList, tasks) => {
   let container = document.querySelector('.content');
 
   // if Content element doesnt exist, build it.
   if (!container) {
     container = new Container('content', { background: 'hotpink' });
-    if (days) { // if days exist...
-      renderContent(taskList, days, container.DOMElement);
+    if (tasks) { // if days exist...
+      renderContent(taskList, tasks, container.DOMElement);
     }
     return container;
   } else if (container) {
-    if (days) { // if days exist...
-      renderContent(taskList, days, container);
+    if (tasks) { // if days exist...
+      renderContent(taskList, tasks, container);
     }
     return container;
   }
 }
 
-const renderContent = (taskList, days, container) => {
+const renderContent = (taskList, tasks, container) => {
   const tasksWrapper = new Container('wrapper');
   // wipe content for re-rendering
   container.textContent = '';
-  for (let task of days) {
+  for (let task of tasks) {
     const taskCard = new Elem({
       tag: 'div',
       selectors: 'taskCard',
