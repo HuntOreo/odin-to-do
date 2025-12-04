@@ -12,7 +12,7 @@ const Tasks = (taskList, appStateHolder) => {
   }
 
   // Check if container is a DOM element (it existed)
-  // or if its a Elem Object (it didnt exist)
+  // or if its a Elem Object (it didn't exist)
   if (tasksContainer.DOMElement) {
     buildFolders(taskList, tasksContainer.DOMElement, appStateHolder);
   } else {

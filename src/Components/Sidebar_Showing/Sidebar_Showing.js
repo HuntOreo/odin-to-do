@@ -13,7 +13,7 @@ const Sidebar_Showing = (taskList, appStateHolder) => {
     const container = new Container({
       selectors: ['sidebar_showing', 'hideElem']
     }, { background: 'violet' });
-    container.append([TaskForm(taskList), Tasks(taskList, appStateHolder)]);
+    container.append([TaskForm(taskList, appStateHolder), Tasks(taskList, appStateHolder)]);
     return container;
   }
 }

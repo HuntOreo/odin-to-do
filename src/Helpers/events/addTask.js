@@ -1,7 +1,7 @@
 import Task from "../../Task_Class";
 import { updateTasks } from "../updateTasks";
 
-const addTask = (taskList) => {
+const addTask = (taskList, appStateHolder) => {
 	const monthInput = document.querySelector('#sidebarMonth');
 	const dayInput = document.querySelector('#sidebarDay');
 
@@ -12,7 +12,7 @@ const addTask = (taskList) => {
 		}
 	});
 
-	return updateTasks(task, taskList);
+	return updateTasks(task, taskList, appStateHolder);
 }
 
 export {

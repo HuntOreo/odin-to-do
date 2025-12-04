@@ -5,7 +5,7 @@ import Preview from '../Preview/Preview';
 import toggleTaskCreator from '../../Helpers/events/toggleTaskCreator';
 import renderPreview from '../../Helpers/events/renderPreview';
 
-const TaskForm = (taskList) => {
+const TaskForm = (taskList, appStateHolder) => {
   const container = new Container('form_container', { background: 'pink' })
   const form = new Elem({
     tag: 'form',
@@ -38,8 +38,8 @@ const TaskForm = (taskList) => {
   dateInput.addListener('change', updateDate);
   calendarBtn.addListener('click', () => openDateInput(container.DOMElement));
   addTaskBtn.addListener('click', (e) => {
-    const newTask = addTask(taskList);
-    renderPreview(newTask.id, taskList)
+    const newTask = addTask(taskList, appStateHolder);
+    renderPreview(newTask.id, taskList, appStateHolder)
   });
 
   container.append([form, dateInput, calendarBtn, addTaskBtn]);
