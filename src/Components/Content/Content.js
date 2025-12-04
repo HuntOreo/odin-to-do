@@ -5,8 +5,7 @@ import updateColor from '../../Helpers/events/updateColor';
 import updatePriority from '../../Helpers/events/updatePriority';
 import { updateCookie } from '../../Helpers/handleCookies';
 
-const Content = (taskList, appStateHolder) => {
-  const tasks = appStateHolder.content;
+const Content = (taskList, tasks, appStateHolder) => {
   let container = document.querySelector('.content');
 
   // if Content element doesnt exist, build it.

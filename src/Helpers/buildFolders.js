@@ -70,11 +70,12 @@ const renderTree = (treeArr, taskList, container, appStateHolder) => {
 	}
 }
 
-const handleTasks = (task, taskFolder, taskList, days, appStateHolder) => {
+const handleTasks = (task, taskFolder, taskList, tasks, appStateHolder) => {
 	// Render sibling tasks into view on click 
 	taskFolder.addListener('click', () => {
-		Content(taskList, days);
-		appStateHolder.content = days;
+		console.log('clicked!')
+		Content(taskList, tasks, appStateHolder);
+		appStateHolder.content = tasks;
 		updateCookie('appState', appStateHolder);
 	});
 	// grab that tasks edit btn and assign listener
@@ -84,11 +85,11 @@ const handleTasks = (task, taskFolder, taskList, days, appStateHolder) => {
 	})
 	const deleteTaskBtn = taskFolder.DOMElement.querySelector('.deleteTaskBtn');
 	deleteTaskBtn.addEventListener('click', (e) => {
-		deleteTask(task.id, taskList, days);
+		deleteTask(task.id, taskList, tasks, appStateHolder);
 	})
 	const completeBtn = taskFolder.DOMElement.querySelector('.completeBtn');
 	completeBtn.addEventListener('click', (e) => {
-		completeTask(task, taskList, days,);
+		completeTask(task, taskList, tasks,);
 	})
 }
 
