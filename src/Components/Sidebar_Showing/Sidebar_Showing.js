@@ -6,7 +6,7 @@ const Sidebar_Showing = (taskList, appStateHolder) => {
   const sidebar = document.querySelector('.sidebar_showing');
   if (sidebar) {
     sidebar.textContent = ''
-    sidebar.append(TaskForm(taskList).DOMElement);
+    sidebar.append(TaskForm(taskList, appStateHolder).DOMElement);
     sidebar.append(Tasks(taskList, appStateHolder).DOMElement);
   } else {
     const container = new Container({

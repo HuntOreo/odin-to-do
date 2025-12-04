@@ -76,7 +76,7 @@ const handleTasks = (task, taskFolder, taskList, tasks, appStateHolder) => {
 	taskFolder.addListener('click', () => {
 		console.log('clicked!')
 		Content(taskList, tasks, appStateHolder);
-		appStateHolder.content = tasks;
+		appStateHolder.content = [...tasks];
 		updateCookie('appState', appStateHolder);
 	});
 	// grab that tasks edit btn and assign listener
