@@ -5,25 +5,26 @@ import updateColor from '../../Helpers/events/updateColor';
 import updatePriority from '../../Helpers/events/updatePriority';
 import { updateCookie } from '../../Helpers/handleCookies';
 
-const Content = (taskList, tasks) => {
+const Content = (taskList, appStateHolder) => {
+  const tasks = appStateHolder.content;
   let container = document.querySelector('.content');
 
   // if Content element doesnt exist, build it.
   if (!container) {
     container = new Container('content', { background: 'hotpink' });
     if (tasks) { // if days exist...
-      renderContent(taskList, tasks, container.DOMElement);
+      renderContent(taskList, tasks, container.DOMElement, appStateHolder);
     }
     return container;
   } else if (container) {
     if (tasks) { // if days exist...
-      renderContent(taskList, tasks, container);
+      renderContent(taskList, tasks, container, appStateHolder);
     }
     return container;
   }
 }
 
-const renderContent = (taskList, tasks, container) => {
+const renderContent = (taskList, tasks, container, appStateHolder) => {
   const tasksWrapper = new Container('wrapper');
   // wipe content for re-rendering
   container.textContent = '';
@@ -70,7 +71,9 @@ const renderContent = (taskList, tasks, container) => {
     const priorityBox = taskCard.DOMElement.querySelector('.priorityCheck');
 
     editTaskBtn.addEventListener('click', () => Preview(task, taskList));
-    deleteTaskBtn.addEventListener('click', () => deleteTask(task.id, taskList, tasks));
+    deleteTaskBtn.addEventListener('click', () => {
+      deleteTask(task.id, taskList, tasks, appStateHolder);
+    });
     assignColorInput.addEventListener('input', (e) => {
       const color = e.target.value;
       updateColor(color, taskCard, task, taskList);
