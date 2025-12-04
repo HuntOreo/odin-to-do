@@ -78,7 +78,9 @@ const renderContent = (taskList, tasks, container, appStateHolder) => {
       updateColor(color, taskCard, task, taskList);
       updateCookie('userTasks', taskList);
     });
-    priorityBox.addEventListener('change', (e) => updatePriority(e, task, taskList))
+    priorityBox.addEventListener('change', (e) => {
+      updatePriority(e, task, taskList, appStateHolder);
+    });
 
     tasksWrapper.append(taskCard)
   }

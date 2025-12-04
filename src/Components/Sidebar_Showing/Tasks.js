@@ -2,6 +2,7 @@ import { Container } from 'elekit';
 import { buildFolders } from '../../Helpers/buildFolders';
 
 const Tasks = (taskList, appStateHolder) => {
+  console.log(appStateHolder);
   let tasksContainer = document.querySelector('.sidebar_showing .tasks');
 
   if (tasksContainer) {

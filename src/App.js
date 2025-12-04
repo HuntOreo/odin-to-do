@@ -21,7 +21,7 @@ const App = function (taskList, appStateHolder) {
     Preview(),
   ]);
 
-  if (!(appStateHolder.content === null)) {
+  if (appStateHolder.content) {
     main.append(Content(taskList, appStateHolder.content, appStateHolder));
   } else {
     main.append(Content(taskList, appStateHolder.content, appStateHolder));

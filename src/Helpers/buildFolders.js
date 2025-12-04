@@ -31,6 +31,7 @@ const buildFolders = (taskList, container, appStateHolder) => {
 }
 
 const renderTree = (treeArr, taskList, container, appStateHolder) => {
+	console.log(appStateHolder)
 	for (let folder of treeArr) {
 		const parentContainer = new Container('parent');
 		const parentHeader = new Head({
@@ -89,7 +90,7 @@ const handleTasks = (task, taskFolder, taskList, tasks, appStateHolder) => {
 	})
 	const completeBtn = taskFolder.DOMElement.querySelector('.completeBtn');
 	completeBtn.addEventListener('click', (e) => {
-		completeTask(task, taskList, tasks,);
+		completeTask(task, taskList, tasks, appStateHolder);
 	})
 }
 

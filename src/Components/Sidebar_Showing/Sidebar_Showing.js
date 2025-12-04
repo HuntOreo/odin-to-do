@@ -3,7 +3,6 @@ import TaskForm from './TaskForm';
 import Tasks from './Tasks';
 
 const Sidebar_Showing = (taskList, appStateHolder) => {
-  console.log(appStateHolder);
   const sidebar = document.querySelector('.sidebar_showing');
   if (sidebar) {
     sidebar.textContent = ''

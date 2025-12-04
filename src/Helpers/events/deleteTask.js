@@ -12,12 +12,11 @@ const deleteTask = (taskID, taskList, tasks, appStateHolder) => {
   tasks.splice(tasksIndex, 1);
   appStateContent.splice(contentIndex, 1);
 
-  document.cookie = `userTasks=${JSON.stringify(taskList)}`;
   updateCookie('userTasks', taskList);
   updateCookie('appState', appStateHolder);
 
-  Sidebar_Showing(taskList);
-  Content(taskList, tasks);
+  Sidebar_Showing(taskList, appStateHolder);
+  Content(taskList, tasks, appStateHolder);
 }
 
 export default deleteTask;

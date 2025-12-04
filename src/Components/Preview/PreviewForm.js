@@ -6,7 +6,7 @@ import updatePriority from "../../Helpers/events/updatePriority";
 import updateColor from '../../Helpers/events/updateColor';
 import getCard from '../../Helpers/getCard';
 
-const Form = (task, taskList) => {
+const Form = (task, taskList, appStateHolder) => {
 	const container = new Container('formContainer');
 
 	const form = new Elem({
@@ -78,9 +78,11 @@ const Form = (task, taskList) => {
 		updateCookie('userTasks', taskList);
 	});
 
-	priorityBox.addEventListener('change', (e) => updatePriority(e, task, taskList))
+	priorityBox.addEventListener('change', (e) => {
+		updatePriority(e, task, taskList, appStateHolder);
+	});
 
-	container.append([PreviewHeader(task, taskList), form]);
+	container.append([PreviewHeader(task, taskList, appStateHolder), form]);
 	return container;
 }
 
