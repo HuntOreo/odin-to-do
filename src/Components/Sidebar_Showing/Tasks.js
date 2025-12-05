@@ -8,7 +8,7 @@ const Tasks = (taskList, appStateHolder) => {
   if (tasksContainer) {
     tasksContainer.textContent = '';
   } else {
-    const container = new Container('tasks', { background: 'yellow' });
+    const container = new Container('tasks');
     tasksContainer = container;
   }
 

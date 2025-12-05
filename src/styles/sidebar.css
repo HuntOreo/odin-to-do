@@ -2,7 +2,6 @@
   Sidebar - Hidden
   =================
 */
-
 .sidebar_hidden {
   display: flex;
   flex-direction: column;
@@ -27,9 +26,17 @@
   background-color: var(--button-gray);
 }
 
+/* 
+  Sidebar Showing
+  ================
+*/
+  .sidebar_showing {
+    background-color: var(--background-gray);
+  }
+
 /*
-  Task Form
-  =========
+  Showing -> Task Form
+  =====================
 */
 .sidebar_showing > .form_container {
   display: flex;
@@ -60,4 +67,23 @@
 .sidebar_showing > .form_container > button {
   width: 40px;
   height: 40px;
+}
+
+/*
+  Showing -> Tasks
+  =================
+*/
+.sidebar_showing > .tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 5px;
+}
+
+.sidebar_showing > .tasks .parent {
+  background-color: var(--button-gray);
+}
+
+.sidebar_showing > .tasks .parent h2 {
+  text-align: center;
 }
