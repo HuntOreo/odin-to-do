@@ -3,6 +3,7 @@
 @import '/src/styles/sidebar.css';
 @import '/src/styles/header.css';
 @import '/src/styles/content.css';
+@import '/src/styles/editor.css';
 
 :root {
   --background-primary: #556177;
@@ -12,6 +13,7 @@
   --button-gray: #ADADAD;
   --delete-red: #F54646;
   --path-orange: #F4A04C;
+  --alt-gray: #646464;
 }
 
 body, html {
@@ -83,9 +85,11 @@ main .content .wrapper {
   max-height: calc(100vh - 100px);
 }
 
-main .sidebar_showing,
-main .task_creator {
+main .sidebar_showing {
   min-width: clamp(150px, 30vw, 250px);
+}
+main .task_creator {
+  min-width: clamp(150px, 30vw, 400px);
 }
 
 /* Hide elements */

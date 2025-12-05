@@ -1,0 +1,20 @@
+.task_creator {
+  min-width: 400px;
+
+  background: var(--alt-gray);
+  text-align: center;
+}
+
+.task_creator > .formContainer {
+  height: 100%;
+}
+
+.task_creator > .formContainer .head {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.task_creator > .formContainer .head button {
+  padding: 5px;
+}
