@@ -31,6 +31,10 @@ body, html {
   display: grid;
 }
 
+button {
+  cursor: pointer;
+}
+
 /* 
   Grid Layout 
   =============

@@ -100,8 +100,28 @@
 
 .sidebar_showing > .tasks .day {
   background: var(--background-gray);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 3px 0;
 }
 
 .sidebar_showing > .tasks .day h3 {
   color: #646464;
+}
+
+.sidebar_showing > .tasks .day .taskFolder:hover {
+  border: 1px solid gray;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.sidebar_showing > .tasks button {
+  width: 32px;
+  height: 25px;
+}
+
+.sidebar_showing > .tasks .deleteTaskBtn {
+  border-radius: 5px;
+  border: 1px solid darkred;
 }
