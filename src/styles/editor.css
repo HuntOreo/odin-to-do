@@ -1,3 +1,7 @@
+/* 
+  Editor
+  =======
+*/
 .task_creator {
   min-width: 400px;
 
@@ -6,6 +10,8 @@
 }
 
 .task_creator > .formContainer {
+  display: flex;
+  flex-direction: column;
   height: 100%;
 }
 
@@ -13,8 +19,72 @@
   display: flex;
   justify-content: center;
   gap: 15px;
+  padding: 5px 0;
+
+  color: #fff;
 }
 
-.task_creator > .formContainer .head button {
+.task_creator > .formContainer > .head button {
   padding: 5px;
+}
+
+.task_creator > .formContainer > #taskCreatorForm {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-around;
+  height: 100%;
+}
+
+.task_creator > .formContainer > #taskCreatorForm .wrapper,
+.task_creator > .formContainer > #taskCreatorForm button {
+  margin: 0 5px;
+}
+
+.task_creator > .formContainer > #taskCreatorForm #title,
+.task_creator > .formContainer > #taskCreatorForm textarea {
+  width: 100%;
+
+  border-radius: 5px;
+  border: 1px solid gray;
+  box-shadow: inset 0px 0px 3px gray;
+}
+
+.task_creator > .formContainer > #taskCreatorForm textarea {
+  max-width: 275px;
+  height: 200px;
+  max-height: 200px;
+  padding: 3px;
+}
+
+.task_creator > .formContainer > #taskCreatorForm .checkboxes {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  color: #fff;
+}
+
+.task_creator > .formContainer > #taskCreatorForm #colorBox {
+  height: 25px;
+}
+
+.task_creator > .formContainer > #taskCreatorForm button {
+  padding: 10px;
+  
+  background: var(--button-blue);
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 900;
+  transition-duration: 0.2s;
+}
+
+.task_creator > .formContainer > #taskCreatorForm button:hover {
+  filter: brightness(85%);
+}
+
+.task_creator > .formContainer > #taskCreatorForm button:active {
+  transform: scale(0.95);
 }
