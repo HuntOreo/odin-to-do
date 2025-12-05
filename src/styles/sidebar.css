@@ -110,6 +110,16 @@
   color: #646464;
 }
 
+.sidebar_showing > .tasks .day .taskFolder {
+  display: flex;
+  gap: 10px;
+  padding: 0 5px;
+}
+
+.sidebar_showing > .tasks .day .taskFolder span {
+  margin-right: auto;
+}
+
 .sidebar_showing > .tasks .day .taskFolder:hover {
   border: 1px solid gray;
   border-radius: 5px;
