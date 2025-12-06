@@ -8,9 +8,7 @@ const Preview = (task, taskList) => {
 		container.append(Form(task, taskList).DOMElement);
 	} else {
 		container = new Container(
-			{ selectors: ['task_creator', 'hideElem'] },
-			{ background: 'orange' }
-		);
+			{ selectors: ['task_creator', 'hideElem'] });
 		if (task) {
 			container.append(Form(task, taskList));
 		} else {

@@ -5,8 +5,8 @@ import Preview from '../Preview/Preview';
 import toggleTaskCreator from '../../Helpers/events/toggleTaskCreator';
 import renderPreview from '../../Helpers/events/renderPreview';
 
-const TaskForm = (taskList) => {
-  const container = new Container('form_container', { background: 'pink' })
+const TaskForm = (taskList, appStateHolder) => {
+  const container = new Container('form_container')
   const form = new Elem({
     tag: 'form',
     content: `
@@ -32,14 +32,23 @@ const TaskForm = (taskList) => {
   ` });
   const addTaskBtn = new Button({
     selectors: 'addTaskBtn',
-    content: 'Add'
+    content: '+',
   });
+
+  calendarBtn.applyTemplate({
+    padding: 0, // Reset default padding
+  });
+  addTaskBtn.applyTemplate({
+    padding: 0, // Reset default padding
+    fontWeight: 700,
+    fontSize: '1.2em'
+  })
 
   dateInput.addListener('change', updateDate);
   calendarBtn.addListener('click', () => openDateInput(container.DOMElement));
   addTaskBtn.addListener('click', (e) => {
-    const newTask = addTask(taskList);
-    renderPreview(newTask.id, taskList)
+    const newTask = addTask(taskList, appStateHolder);
+    renderPreview(newTask.id, taskList, appStateHolder)
   });
 
   container.append([form, dateInput, calendarBtn, addTaskBtn]);

@@ -5,25 +5,29 @@ import updateColor from '../../Helpers/events/updateColor';
 import updatePriority from '../../Helpers/events/updatePriority';
 import { updateCookie } from '../../Helpers/handleCookies';
 
-const Content = (taskList, days) => {
+const Content = (taskList, tasks, appStateHolder) => {
   let container = document.querySelector('.content');
 
   // if Content element doesnt exist, build it.
   if (!container) {
     container = new Container('content', { background: 'hotpink' });
-    renderContent(taskList, days, container.DOMElement);
+    if (tasks) { // if days exist...
+      renderContent(taskList, tasks, container.DOMElement, appStateHolder);
+    }
     return container;
   } else if (container) {
-    renderContent(taskList, days, container);
+    if (tasks) { // if days exist...
+      renderContent(taskList, tasks, container, appStateHolder);
+    }
     return container;
   }
 }
 
-const renderContent = (taskList, days, container) => {
+const renderContent = (taskList, tasks, container, appStateHolder) => {
   const tasksWrapper = new Container('wrapper');
   // wipe content for re-rendering
   container.textContent = '';
-  for (let task of days) {
+  for (let task of tasks) {
     const taskCard = new Elem({
       tag: 'div',
       selectors: 'taskCard',
@@ -66,13 +70,17 @@ const renderContent = (taskList, days, container) => {
     const priorityBox = taskCard.DOMElement.querySelector('.priorityCheck');
 
     editTaskBtn.addEventListener('click', () => Preview(task, taskList));
-    deleteTaskBtn.addEventListener('click', () => deleteTask(task.id, taskList, days));
+    deleteTaskBtn.addEventListener('click', () => {
+      deleteTask(task.id, taskList, tasks, appStateHolder);
+    });
     assignColorInput.addEventListener('input', (e) => {
       const color = e.target.value;
       updateColor(color, taskCard, task, taskList);
       updateCookie('userTasks', taskList);
     });
-    priorityBox.addEventListener('change', (e) => updatePriority(e, task, taskList))
+    priorityBox.addEventListener('change', (e) => {
+      updatePriority(e, task, taskList, appStateHolder);
+    });
 
     tasksWrapper.append(taskCard)
   }

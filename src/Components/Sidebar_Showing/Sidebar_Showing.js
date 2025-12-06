@@ -6,13 +6,11 @@ const Sidebar_Showing = (taskList, appStateHolder) => {
   const sidebar = document.querySelector('.sidebar_showing');
   if (sidebar) {
     sidebar.textContent = ''
-    sidebar.append(TaskForm(taskList).DOMElement);
+    sidebar.append(TaskForm(taskList, appStateHolder).DOMElement);
     sidebar.append(Tasks(taskList, appStateHolder).DOMElement);
   } else {
-    const container = new Container({
-      selectors: ['sidebar_showing', 'hideElem']
-    }, { background: 'violet' });
-    container.append([TaskForm(taskList), Tasks(taskList, appStateHolder)]);
+    const container = new Container({selectors: ['sidebar_showing', 'hideElem']});
+    container.append([TaskForm(taskList, appStateHolder), Tasks(taskList, appStateHolder)]);
     return container;
   }
 }

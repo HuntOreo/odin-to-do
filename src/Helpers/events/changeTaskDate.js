@@ -4,7 +4,7 @@ import Content from '../../Components/Content/Content';
 import updateTaskCreator from '../updateTaskCreator';
 import { updateCookie } from '../handleCookies';
 
-const changeTaskDate = (event, task, taskList) => {
+const changeTaskDate = (event, task, taskList, appStateHolder) => {
   const date = event.target.value;
   const luxonDate = DateTime.fromISO(date);
 
@@ -23,10 +23,11 @@ const changeTaskDate = (event, task, taskList) => {
   const matchingTasks = taskList.filter(child => {
     return child.date.month == updatedTask.date.month
   });
-  
-  Content(taskList, matchingTasks);
+
+  Content(taskList, matchingTasks, appStateHolder);
   updateTaskCreator(task, taskList);
   updateCookie('userTasks', taskList);
+  updateCookie('appState', appStateHolder);
 }
 
 export {

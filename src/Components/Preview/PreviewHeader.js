@@ -2,7 +2,7 @@ import { Container, Button, Head, Input } from 'elekit';
 import { openDateInput } from '../../Helpers/events/handleDateInput';
 import { changeTaskDate } from '../../Helpers/events/changeTaskDate';
 
-const PreviewHeader = (task, taskList) => {
+const PreviewHeader = (task, taskList, appStateHolder) => {
   const taskDateParam = task.date;
 
   const container = new Container('head');
@@ -29,7 +29,7 @@ const PreviewHeader = (task, taskList) => {
     <span class="material-symbols-outlined">date_range</span>
   ` });
   hiddenDateInput.addListener('change',
-    (event) => changeTaskDate(event, task, taskList)
+    (event) => changeTaskDate(event, task, taskList, appStateHolder)
   );
   calendarBtn.addListener('click', () => openDateInput(container.DOMElement));
 

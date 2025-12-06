@@ -2,17 +2,18 @@ import { Container } from 'elekit';
 import { buildFolders } from '../../Helpers/buildFolders';
 
 const Tasks = (taskList, appStateHolder) => {
+  console.log(appStateHolder);
   let tasksContainer = document.querySelector('.sidebar_showing .tasks');
 
   if (tasksContainer) {
     tasksContainer.textContent = '';
   } else {
-    const container = new Container('tasks', { background: 'yellow' });
+    const container = new Container('tasks');
     tasksContainer = container;
   }
 
   // Check if container is a DOM element (it existed)
-  // or if its a Elem Object (it didnt exist)
+  // or if its a Elem Object (it didn't exist)
   if (tasksContainer.DOMElement) {
     buildFolders(taskList, tasksContainer.DOMElement, appStateHolder);
   } else {

@@ -2,12 +2,13 @@
 import Sidebar_Showing from "../../Components/Sidebar_Showing/Sidebar_Showing";
 import { updateCookie } from "../handleCookies";
 
-const updatePriority = (e, task, taskList) => {
+const updatePriority = (e, task, taskList, appStateHolder) => {
     task.priority = e.target.checked;
     const index = taskList.findIndex(child => child.id === task.id);
     taskList[index] = task;
 
     updateCookie('userTasks', taskList);
+    updateCookie('appState', appStateHolder);
     Sidebar_Showing(taskList);
 }
 
