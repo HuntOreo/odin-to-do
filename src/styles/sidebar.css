@@ -78,6 +78,9 @@
   flex-direction: column;
   gap: 10px;
   padding: 5px;
+  max-height: calc(100vh - 150px);
+
+  overflow-y: auto;
 }
 
 .sidebar_showing > .tasks .parent,
