@@ -1,9 +1,7 @@
 import { Elem, Head } from 'elekit';
 
 const Header = function () {
-  const header = new Elem({
-    tag: 'header'
-  }, { background: 'lightgreen' });
+  const header = new Elem({tag: 'header'});
 
   const logo = new Head('LOGO');
 

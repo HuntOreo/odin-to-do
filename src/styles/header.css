@@ -1,4 +1,14 @@
+/* 
+ Header
+ =======
+*/
 header {
-  box-shadow: -5px 0px 5px gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 1;
+
+  background-color: var(--button-gray);
+  box-shadow: -5px 0px 5px gray;
+  color: var(--alt-gray);
 }
