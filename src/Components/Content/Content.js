@@ -10,7 +10,7 @@ const Content = (taskList, tasks, appStateHolder) => {
 
   // if Content element doesnt exist, build it.
   if (!container) {
-    container = new Container('content', { background: 'hotpink' });
+    container = new Container('content');
     if (tasks) { // if days exist...
       renderContent(taskList, tasks, container.DOMElement, appStateHolder);
     }
