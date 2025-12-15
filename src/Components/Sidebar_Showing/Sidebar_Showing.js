@@ -3,13 +3,14 @@ import TaskForm from './TaskForm';
 import Tasks from './Tasks';
 
 const Sidebar_Showing = (taskList, appStateHolder) => {
+
   const sidebar = document.querySelector('.sidebar_showing');
   if (sidebar) {
     sidebar.textContent = ''
     sidebar.append(TaskForm(taskList, appStateHolder).DOMElement);
     sidebar.append(Tasks(taskList, appStateHolder).DOMElement);
   } else {
-    const container = new Container({selectors: ['sidebar_showing', 'hideElem']});
+    const container = new Container({ selectors: ['sidebar_showing', 'hideElem'] });
     container.append([TaskForm(taskList, appStateHolder), Tasks(taskList, appStateHolder)]);
     return container;
   }

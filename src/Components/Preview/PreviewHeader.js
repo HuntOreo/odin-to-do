@@ -3,6 +3,7 @@ import { openDateInput } from '../../Helpers/events/handleDateInput';
 import { changeTaskDate } from '../../Helpers/events/changeTaskDate';
 
 const PreviewHeader = (task, taskList, appStateHolder) => {
+
   const taskDateParam = task.date;
 
   const container = new Container('head');

@@ -18,7 +18,7 @@ const Sidebar_Hidden = (taskList, appStateHolder) => {
   })
 
   openPreview.addListener('click', (e) => {
-    renderPreview(undefined, taskList)
+    renderPreview(undefined, taskList, appStateHolder)
   })
   container.append([openSidebar, openPreview]);
   return container;

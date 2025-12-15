@@ -7,6 +7,7 @@ import updateColor from '../../Helpers/events/updateColor';
 import getCard from '../../Helpers/getCard';
 
 const Form = (task, taskList, appStateHolder) => {
+
 	const container = new Container('formContainer');
 
 	const form = new Elem({

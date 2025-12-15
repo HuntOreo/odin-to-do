@@ -1,0 +1,66 @@
+/* 
+	Content
+	========
+*/
+main > .content {
+	background: var(--background-primary);
+}
+
+/* 
+	Content - Cards
+	================
+*/
+main > .content .taskCard {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	padding: 10px;
+	min-width: 250px;
+	min-height: 300px;
+
+	border-radius: 5px;
+	background: var(--button-gray);
+}
+
+main .content .taskCard h2 {
+	text-align: center;
+}
+
+main .content .taskCard p {
+	height: 50%;
+}
+
+main > .content .taskCard h2,
+main > .content .taskCard p {
+	padding: 3px;
+	
+	border-radius: 5px;
+	background-color: #fff;
+
+}
+
+main > .content .taskCard .container {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	align-items: center;
+}
+
+main > .content .taskCard .container .btns {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	width: 100%;
+}
+
+main > .content .taskCard .container .checkboxes {
+	margin-bottom: auto;
+}
+
+main > .content .taskCard .container button {
+	padding: 3px;
+	width: 55px;
+
+	border: 1px solid gray;
+	border-radius: 5px;
+}

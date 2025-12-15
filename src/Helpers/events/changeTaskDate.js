@@ -24,6 +24,7 @@ const changeTaskDate = (event, task, taskList, appStateHolder) => {
     return child.date.month == updatedTask.date.month
   });
 
+
   Content(taskList, matchingTasks, appStateHolder);
   updateTaskCreator(task, taskList);
   updateCookie('userTasks', taskList);
