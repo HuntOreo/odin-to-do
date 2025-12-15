@@ -24,6 +24,7 @@ const Content = (taskList, tasks, appStateHolder) => {
 }
 
 const renderContent = (taskList, tasks, container, appStateHolder) => {
+  console.log(appStateHolder)
   const tasksWrapper = new Container('wrapper');
   // wipe content for re-rendering
   container.textContent = '';
@@ -69,7 +70,7 @@ const renderContent = (taskList, tasks, container, appStateHolder) => {
     const assignColorInput = taskCard.DOMElement.querySelector('.assignColor');
     const priorityBox = taskCard.DOMElement.querySelector('.priorityCheck');
 
-    editTaskBtn.addEventListener('click', () => Preview(task, taskList));
+    editTaskBtn.addEventListener('click', () => Preview(task, taskList, appStateHolder));
     deleteTaskBtn.addEventListener('click', () => {
       deleteTask(task.id, taskList, tasks, appStateHolder);
     });

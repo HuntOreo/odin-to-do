@@ -27,6 +27,7 @@ const buildFolders = (taskList, container, appStateHolder) => {
 
 	const organizedFolders = organizeFolders(treeBlueprint);
 
+
 	renderTree(organizedFolders, taskList, container, appStateHolder);
 }
 
@@ -71,26 +72,27 @@ const renderTree = (treeArr, taskList, container, appStateHolder) => {
 	}
 }
 
-const handleTasks = (task, taskFolder, taskList, tasks, appStateHolder) => {
+const handleTasks = (task, taskFolder, taskList, dayTasks, appStateHolder) => {
 	// Render sibling tasks into view on click 
 	taskFolder.addListener('click', () => {
 		console.log('clicked!')
-		Content(taskList, tasks, appStateHolder);
-		appStateHolder.content = [...tasks];
+
+		Content(taskList, dayTasks, appStateHolder);
+		appStateHolder.content = [...dayTasks];
 		updateCookie('appState', appStateHolder);
 	});
 	// grab that tasks edit btn and assign listener
 	const editTaskBtn = taskFolder.DOMElement.querySelector('.editTaskBtn');
 	editTaskBtn.addEventListener('click', (e) => {
-		renderPreview(task.id, taskList);
+		renderPreview(task.id, taskList, appStateHolder);
 	})
 	const deleteTaskBtn = taskFolder.DOMElement.querySelector('.deleteTaskBtn');
 	deleteTaskBtn.addEventListener('click', (e) => {
-		deleteTask(task.id, taskList, tasks, appStateHolder);
+		deleteTask(task.id, taskList, dayTasks, appStateHolder);
 	})
 	const completeBtn = taskFolder.DOMElement.querySelector('.completeBtn');
 	completeBtn.addEventListener('click', (e) => {
-		completeTask(task, taskList, tasks, appStateHolder);
+		completeTask(task, taskList, dayTasks, appStateHolder);
 	})
 }
 

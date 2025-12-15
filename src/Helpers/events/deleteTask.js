@@ -3,6 +3,7 @@ import Sidebar_Showing from '../../Components/Sidebar_Showing/Sidebar_Showing';
 import { updateCookie } from '../handleCookies';
 
 const deleteTask = (taskID, taskList, tasks, appStateHolder) => {
+
   const appStateContent = appStateHolder.content;
   const taskListIndex = taskList.findIndex(child => child.id === taskID);
   const tasksIndex = tasks.findIndex(child => child.id === taskID);
